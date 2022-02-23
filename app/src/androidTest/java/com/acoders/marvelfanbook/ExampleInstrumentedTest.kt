@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.flaticon.marvelfanbook", appContext.packageName)
+        assertEquals("com.acoders.marvelfanbook", appContext.packageName)
     }
 }

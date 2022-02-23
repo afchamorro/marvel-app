@@ -1,4 +1,4 @@
-package com.flaticon.marvelfanbook
+package com.acoders.marvelfanbook
 
 import org.junit.Test
 

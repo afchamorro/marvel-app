@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.acoders.marvelfanbook">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MarvelFanBookApplication"
         android:allowBackup="true"

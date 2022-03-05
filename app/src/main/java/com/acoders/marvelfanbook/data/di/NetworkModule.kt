@@ -22,6 +22,7 @@ object NetworkModule {
     @Provides
     fun provideDefaultBaseUrl() = DOMAIN
 
+    // DUDAS HACER AÑADIR AQUI EL HASH Y EL TIMESTAMP, yo creo que no al ser singleton
     @Provides
     @Singleton
     fun provideOkHttpClient() = OkHttpClient.Builder().apply {
@@ -31,15 +32,16 @@ object NetworkModule {
                 .newBuilder()
                 .addQueryParameter(name = API_KEY_PARAM, value = BuildConfig.MARVEL_PUBLIC_API_KEY)
                 .build()
-            val updated = request.newBuilder()
-                .url(url)
-                .build()
+            val updated = request.newBuilder().apply {
+                url(url)
+            }.build()
 
             chain.proceed(updated)
         }
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            }
             addInterceptor(loggingInterceptor)
         }
     }.build()

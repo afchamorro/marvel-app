@@ -44,6 +44,10 @@ dependencies {
 
     // Android KTX
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+
+    //Lifeciclye
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
     // Android UI and appcompat
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -52,8 +56,10 @@ dependencies {
 
     //Dependence injection HILT
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-
 
     //Network - OK HTTP
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
@@ -65,11 +71,12 @@ dependencies {
     //Serialization - Moshi
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
+    //Logs
+    implementation "com.jakewharton.timber:timber:4.7.1"
 
     //TESTING
     testImplementation 'junit:junit:4.13.2'

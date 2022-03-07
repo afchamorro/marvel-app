@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val DOMAIN = "https://gateway.marvel.com/"
+    private const val DOMAIN = "https://gateway.marvel.com/v1/public/"
     private const val API_KEY_PARAM = "apikey"
     private const val TIME_STAMP_PARAM = "ts"
     private const val HASH_PARAM = "hash"

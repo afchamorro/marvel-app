@@ -2,6 +2,8 @@ buildscript {
 
     ext {
         hilt_version = '2.38.1'
+        retrofit_version = "2.9.0"
+        okhttp_version = "4.9.2"
     }
 
     dependencies {

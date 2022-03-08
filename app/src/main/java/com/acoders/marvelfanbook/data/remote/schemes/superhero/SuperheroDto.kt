@@ -1,37 +1,49 @@
 package com.acoders.marvelfanbook.data.remote.schemes.superhero
 
-import com.squareup.moshi.Json
+import com.acoders.marvelfanbook.features.superheroes.domain.models.ResourceList
+import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
+import com.acoders.marvelfanbook.features.superheroes.domain.models.Thumbnail
 
 data class SuperheroDto(
-    @field:Json(name = "id")
     val id: Long = 0,
-    @field:Json(name = "name")
     val name: String = "",
-    @field:Json(name = "thumbnail")
     val thumbnail: ThumbnailDto = ThumbnailDto.empty,
-    @field:Json(name = "comics")
-    val comics: ResourceList = ResourceList.empty,
-    @field:Json(name = "stories")
-    val stories: ResourceList = ResourceList.empty,
-    @field:Json(name = "events")
-    val events: ResourceList = ResourceList.empty,
-    @field:Json(name = "series")
-    val series: ResourceList = ResourceList.empty
-) {
+    val comics: ResourceListDto = ResourceListDto.empty,
+    val stories: ResourceListDto = ResourceListDto.empty,
+    val events: ResourceListDto = ResourceListDto.empty,
+    val series: ResourceListDto = ResourceListDto.empty
+){
+    fun asDomainModel(): Superhero{
+        return Superhero(
+            id,
+            name,
+            thumbnail.asDomainModel(),
+            comics.asDomainModel(),
+            stories.asDomainModel(),
+            events.asDomainModel(),
+            series.asDomainModel()
+        )
+    }
+
     companion object {
         val empty = SuperheroDto()
     }
 }
 
 data class ThumbnailDto(val path: String = "", val extension: String = "") {
+
+    fun asDomainModel(): Thumbnail  = Thumbnail(path, extension)
+
     companion object {
         val empty = ThumbnailDto()
     }
 }
 
-data class ResourceList(val available: Int = 0) {
+data class ResourceListDto(val available: Int = 0) {
+
+    fun asDomainModel(): ResourceList = ResourceList(available)
+
     companion object {
-        val empty = ResourceList()
+        val empty = ResourceListDto()
     }
 }
-

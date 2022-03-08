@@ -6,4 +6,6 @@ import retrofit2.Response
 
 interface MarvelRequests {
     suspend fun superheroes(): Response<PaginatedWrapper<SuperheroDto>>
+
+    suspend fun superhero(id: Long): Response<PaginatedWrapper<SuperheroDto>>
 }

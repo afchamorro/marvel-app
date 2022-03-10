@@ -42,3 +42,4 @@ abstract class BaseRepository {
         const val HTTP_TOO_MANY_CONNECTIONS = 429
     }
 }
+

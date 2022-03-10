@@ -13,4 +13,8 @@ class MarvelServices @Inject constructor(retrofit: Retrofit) : MarvelRequests {
     override suspend fun superheroes(): Response<PaginatedWrapper<SuperheroDto>> {
         return endpoints.getSuperheroes()
     }
+
+    override suspend fun superhero(id: Long): Response<PaginatedWrapper<SuperheroDto>> {
+        return endpoints.getSuperheroDetails(id)
+    }
 }

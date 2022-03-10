@@ -27,7 +27,7 @@ class SuperheroesFragment : Fragment() {
     }
 
     private fun testAPI() {
-        viewModel.testAPIService()
+        viewModel.loadSuperheroes()
     }
 
     companion object {

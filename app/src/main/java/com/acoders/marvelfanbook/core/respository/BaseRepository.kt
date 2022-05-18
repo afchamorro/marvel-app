@@ -1,8 +1,8 @@
 package com.acoders.marvelfanbook.core.respository
 
+import arrow.core.Either
 import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.extensions.logE
-import com.acoders.marvelfanbook.core.functional.Either
 import retrofit2.Response
 import java.net.HttpURLConnection
 

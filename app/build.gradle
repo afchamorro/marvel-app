@@ -81,6 +81,9 @@ dependencies {
     //Serialization - Moshi
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
+    //Errors
+    implementation("io.arrow-kt:arrow-core:1.0.1")
+
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'

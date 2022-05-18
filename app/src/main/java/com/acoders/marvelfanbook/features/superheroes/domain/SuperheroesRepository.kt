@@ -1,7 +1,7 @@
 package com.acoders.marvelfanbook.features.superheroes.domain
 
+import arrow.core.Either
 import com.acoders.marvelfanbook.core.exception.Failure
-import com.acoders.marvelfanbook.core.functional.Either
 import com.acoders.marvelfanbook.core.platform.NetworkHandler
 import com.acoders.marvelfanbook.core.respository.BaseRepository
 import com.acoders.marvelfanbook.data.remote.api.MarvelServices

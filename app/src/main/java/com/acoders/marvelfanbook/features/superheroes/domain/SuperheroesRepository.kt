@@ -7,6 +7,7 @@ import com.acoders.marvelfanbook.core.respository.BaseRepository
 import com.acoders.marvelfanbook.data.remote.api.MarvelServices
 import com.acoders.marvelfanbook.data.remote.schemes.common.Paginated
 import com.acoders.marvelfanbook.data.remote.schemes.common.PaginatedWrapper
+import com.acoders.marvelfanbook.data.remote.schemes.common.Wrapper
 import com.acoders.marvelfanbook.data.remote.schemes.superhero.SuperheroDto
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 import javax.inject.Inject
@@ -30,7 +31,7 @@ interface SuperheroesRepository {
                     ::getResponseAsSuperheroesList,
                     PaginatedWrapper(data = Paginated(results = listOf(SuperheroDto.empty)))
                 )
-                false -> Either.Left(Failure.NetworkConnection)
+                false -> Either.Left(Failure.Connectivity)
             }
         }
 
@@ -53,15 +54,15 @@ interface SuperheroesRepository {
                         marvelServices.superhero(id)
                     },
                     ::getResponseAsSuperhero,
-                    PaginatedWrapper(data = Paginated(results = listOf(SuperheroDto.empty)))
+                    Wrapper(data = SuperheroDto.empty)
                 )
-                false -> Either.Left(Failure.NetworkConnection)
+                false -> Either.Left(Failure.Connectivity)
             }
         }
 
-        private fun getResponseAsSuperhero(wrapper: PaginatedWrapper<SuperheroDto>): Superhero {
+        private fun getResponseAsSuperhero(wrapper: Wrapper<SuperheroDto>): Superhero {
             wrapper.apply {
-                return data.results.first().asDomainModel()
+                return data.asDomainModel()
             }
         }
     }

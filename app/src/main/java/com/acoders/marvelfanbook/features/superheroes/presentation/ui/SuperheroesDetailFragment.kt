@@ -32,7 +32,6 @@ class SuperheroesDetailFragment : Fragment() {
         viewModel.loadSuperheroDetail()
     }
 
-
     companion object {
 
         private const val MOVIE_ID = "movieId"

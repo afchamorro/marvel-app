@@ -10,10 +10,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addTestFragment()
-    }
-
-    private fun addTestFragment(){
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentHost, SuperheroesFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container,SuperheroesFragment(),SuperheroesFragment::class.java.simpleName)
     }
 }

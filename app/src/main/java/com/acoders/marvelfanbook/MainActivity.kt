@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
         addTestFragment()
     }
 
-    private fun addTestFragment(){
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentHost, SuperheroesFragment.newInstance()).commit()
+    private fun addTestFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentHost, SuperheroesFragment.newInstance()).commit()
     }
 }

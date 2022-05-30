@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
     android:layout_width="@dimen/superhero_card_width"
     android:layout_height="@dimen/superhero_card_height"
     android:layout_margin="@dimen/superhero_card_margin"

@@ -9,7 +9,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal abstract class SuperheroesRepositoryModule {
+abstract class SuperheroesRepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun bindRepository(impl: SuperheroesRepository.Network): SuperheroesRepository

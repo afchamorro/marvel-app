@@ -2,6 +2,7 @@ package com.acoders.marvelfanbook.data.di
 
 import com.acoders.marvelfanbook.BuildConfig
 import com.acoders.marvelfanbook.core.extensions.md5
+import com.acoders.marvelfanbook.data.remote.api.MarvelEndpoints
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -80,4 +81,9 @@ object NetworkModule {
         }
         return loggingInterceptor
     }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit) = retrofit.create(MarvelEndpoints::class.java)
+
 }

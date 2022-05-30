@@ -1,7 +1,7 @@
 package com.acoders.marvelfanbook.features.superheroes.domain.usecases
 
+import arrow.core.Either
 import com.acoders.marvelfanbook.core.exception.Failure
-import com.acoders.marvelfanbook.core.functional.Either
 import com.acoders.marvelfanbook.core.interactor.UseCase
 import com.acoders.marvelfanbook.features.superheroes.domain.SuperheroesRepository
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero

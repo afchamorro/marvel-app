@@ -29,6 +29,7 @@
             android:gravity="start|center_vertical"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
             android:minLines="2"
             android:maxLines="3"
             android:background="@drawable/title_gradient_black_bg"

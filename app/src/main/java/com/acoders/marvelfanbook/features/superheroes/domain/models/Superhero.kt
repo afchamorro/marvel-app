@@ -9,5 +9,5 @@ data class Superhero(
     val description: String = "",
     val thumbnail: Thumbnail = Thumbnail.empty
 ) {
-    fun toPresentationModel() = SuperheroView(id, name, description, thumbnail)
+    fun toPresentationModel() = SuperheroView(id, name, thumbnail.toPresentationModel())
 }

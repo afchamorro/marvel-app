@@ -1,4 +1,4 @@
-package com.acoders.marvelfanbook.data.remote.schemes.common
+package com.acoders.marvelfanbook.framework.remote.schemes.common
 
 import com.acoders.marvelfanbook.features.common.domain.models.Thumbnail
 

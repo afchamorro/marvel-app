@@ -1,8 +1,8 @@
-package com.acoders.marvelfanbook.data.di
+package com.acoders.marvelfanbook.framework.di
 
 import com.acoders.marvelfanbook.BuildConfig
 import com.acoders.marvelfanbook.core.extensions.md5
-import com.acoders.marvelfanbook.data.remote.api.MarvelEndpoints
+import com.acoders.marvelfanbook.framework.remote.api.MarvelEndpoints
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

@@ -42,7 +42,7 @@ class SuperHeroViewAdapter(private val superHeroCallback: (SuperheroView) -> Uni
 
         fun bind(item: SuperheroView) {
             binding.apply {
-                heroePictureIv.load(item.thumbnail.path)
+                heroePictureIv.load(item.thumbnail.getUri())
                 heroeNameTv.text = item.name
                 card.setOnClickListener { superHeroCallback(item) }
             }

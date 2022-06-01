@@ -6,23 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.superheroes.presentation.ui.SuperheroesFragment">
 
-    <ImageView
-        android:id="@+id/heroe_picture_iv"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recyclerview"
-        />
-
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/loading_pb"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:indeterminate="true"
-        android:visibility="gone"
+        android:clipToPadding="false"
+        android:padding="@dimen/superhero_card_margin"
+        android:layoutAnimation="@anim/grid_layout_animation"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -33,19 +24,21 @@
         android:textSize="14sp"
         android:textStyle="bold"
         android:text="Datos no disponibles"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading_pb"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="@dimen/cardview_default_elevation"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ sealed interface Failure {
     class Unknown(val message: String) : Failure
 }
 
-fun Throwable.toError(): Failure = when (this) {
+fun Throwable.toFailure(): Failure = when (this) {
     is IOException -> Failure.Connectivity
     is HttpException -> Failure.Server(code())
     else -> Failure.Unknown(message ?: "")

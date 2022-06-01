@@ -14,4 +14,7 @@ interface SuperHeroDao {
 
     @Query("SELECT * FROM super_heroes")
     fun getSuperHeroesList(): Flow<List<SuperHeroEntity>>
+
+    @Query("SELECT COUNT(id) FROM super_heroes")
+    suspend fun numHeroes(): Int
 }

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.launchAndCollect
 import com.acoders.marvelfanbook.core.extensions.visible
@@ -15,6 +15,7 @@ import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.SuperHeroViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class SuperheroesFragment : Fragment() {
@@ -33,7 +34,7 @@ class SuperheroesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SuperheroesFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = SuperheroesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,7 +42,7 @@ class SuperheroesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            recyclerview.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             recyclerview.adapter = adapter
         }
 
@@ -51,24 +52,26 @@ class SuperheroesFragment : Fragment() {
             bindSuperHeroesList(it.dataList)
         }
 
-        loadSuperheroes()
+        viewModel.fetchSuperHeroes()
     }
 
-    private fun loadSuperheroes() {
-        viewModel.loadSuperheroes()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    private fun showLoading(show: Boolean) = binding.apply { if (show) loadingPb.visible() else loadingPb.gone() }
+    private fun showLoading(show: Boolean) {
+        if (show) binding.loadingPb.visibility = View.VISIBLE else binding.loadingPb.visibility = View.GONE
+    }
 
-    // TODO ( Mostrar mensaje de error )
-    private fun showError(show: Boolean) = binding.apply { if (show) errorTv.visible() else errorTv.gone() }
 
-    private fun bindSuperHeroesList(dataList: List<SuperheroView>) = adapter.submitList(dataList)
+    private fun showError(show: Boolean) {
+        if (show) binding.errorTv.visible() else binding.errorTv.gone()
+    }
+
+    private fun bindSuperHeroesList(dataList: List<SuperheroView>) =
+        adapter.submitList(dataList) { binding.recyclerview.scheduleLayoutAnimation() }
 
 
     companion object {

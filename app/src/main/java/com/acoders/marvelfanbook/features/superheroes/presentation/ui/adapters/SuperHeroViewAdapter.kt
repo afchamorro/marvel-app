@@ -3,6 +3,7 @@ package com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.acoders.marvelfanbook.R
 import com.acoders.marvelfanbook.core.extensions.load

@@ -82,6 +82,11 @@ dependencies {
     //Serialization - Moshi
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
+    // Room Database
+    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation 'androidx.room:room-ktx:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
+
     //Errors
     implementation("io.arrow-kt:arrow-core:1.0.1")
 

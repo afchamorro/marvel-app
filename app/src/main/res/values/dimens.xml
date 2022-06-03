@@ -2,5 +2,6 @@
 <resources>
     <dimen name="superhero_card_width">170dp</dimen>
     <dimen name="superhero_card_height">200dp</dimen>
-    <dimen name="superhero_card_margin">6dp</dimen>
+    <dimen name="superhero_card_margin">2dp</dimen>
+    <dimen name="superhero_card_corners_radius">6dp</dimen>
 </resources>

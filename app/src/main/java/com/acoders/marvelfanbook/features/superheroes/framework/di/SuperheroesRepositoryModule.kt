@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 abstract class SuperheroesRepositoryModule {
 
     @Binds
@@ -26,4 +26,5 @@ abstract class SuperheroesRepositoryModule {
 
     @Binds
     abstract fun bindLocalDataSource(localImpl: SuperHeroesLocalDataSourceImpl): SuperHeroesLocalDataSource
+
 }

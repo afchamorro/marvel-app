@@ -35,6 +35,12 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="primary_200">#C72523</color>
+    <color name="primary_500">#C72523</color>
+    <color name="primary_700">#C72523</color>
+    <color name="teal_200">#B9BEBA</color>
+    <color name="teal_700">#B9BEBA</color>
     <color name="black">#FF000000</color>
+    <color name="black60">#99000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

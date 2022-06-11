@@ -2,7 +2,7 @@ package com.acoders.marvelfanbook.core.respository
 
 import arrow.core.Either
 import com.acoders.marvelfanbook.core.exception.Failure
-import com.acoders.marvelfanbook.core.exception.toError
+import com.acoders.marvelfanbook.core.exception.toFailure
 import com.acoders.marvelfanbook.core.extensions.logE
 import retrofit2.Response
 
@@ -26,7 +26,7 @@ abstract class BaseRepository {
 
         } catch (exception: Exception) {
             "ERROR: ${exception.message.toString()}".logE()
-            Either.Left(exception.toError())
+            Either.Left(exception.toFailure())
         }
     }
 }

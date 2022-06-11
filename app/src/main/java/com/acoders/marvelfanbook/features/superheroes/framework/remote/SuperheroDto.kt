@@ -1,6 +1,6 @@
-package com.acoders.marvelfanbook.data.remote.schemes.superhero
+package com.acoders.marvelfanbook.features.superheroes.framework.remote
 
-import com.acoders.marvelfanbook.data.remote.schemes.common.ThumbnailDto
+import com.acoders.marvelfanbook.framework.remote.schemes.common.ThumbnailDto
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 
 data class SuperheroDto(

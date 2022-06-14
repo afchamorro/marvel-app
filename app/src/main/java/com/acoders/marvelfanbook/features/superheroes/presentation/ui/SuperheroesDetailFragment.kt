@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
-import com.acoders.marvelfanbook.features.superheroes.presentation.ui.delegates.CharacterDescriptionDelegate
+import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.CharacterDescriptionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -39,7 +39,7 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun setRecycleViewAdapter() {
         recyclerAdapter.add(
-            CharacterDescriptionDelegate()
+            CharacterDescriptionAdapter()
         )
     }
 

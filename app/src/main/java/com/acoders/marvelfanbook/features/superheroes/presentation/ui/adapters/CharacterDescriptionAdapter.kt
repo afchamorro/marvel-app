@@ -1,4 +1,4 @@
-package com.acoders.marvelfanbook.features.superheroes.presentation.ui.delegates
+package com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,8 @@ import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterIt
 import com.acoders.marvelfanbook.databinding.DescriptionViewBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.DescriptionView
 
-class CharacterDescriptionDelegate :
-    DelegateAdapter<DescriptionView, CharacterDescriptionDelegate.ViewHolder>(
+class CharacterDescriptionAdapter :
+    DelegateAdapter<DescriptionView, CharacterDescriptionAdapter.ViewHolder>(
         DescriptionView::class.java
     ) {
 

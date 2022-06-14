@@ -1,4 +1,4 @@
-package com.acoders.marvelfanbook.framework.di
+package com.acoders.marvelfanbook.data.di
 
 import com.acoders.marvelfanbook.BuildConfig
 import com.acoders.marvelfanbook.core.extensions.md5

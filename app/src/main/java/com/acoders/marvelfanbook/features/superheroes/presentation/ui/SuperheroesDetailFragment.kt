@@ -7,11 +7,17 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
+import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.CharacterDescriptionAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SuperheroesDetailFragment : Fragment() {
+
+    @Inject
+    lateinit var recyclerAdapter: RecycleViewDelegateAdapter
 
     private val viewModel: SuperheroesDetailFragmentViewModel by viewModels()
 
@@ -28,18 +34,23 @@ class SuperheroesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.loadSuperheroDetail(arguments?.getLong(CHARACTER_ID) ?: 0)
+    }
 
-        viewModel.loadSuperheroDetail()
+    private fun setRecycleViewAdapter() {
+        recyclerAdapter.add(
+            CharacterDescriptionAdapter()
+        )
     }
 
     companion object {
 
-        private const val MOVIE_ID = "movieId"
+        private const val CHARACTER_ID = "characterId"
 
         @JvmStatic
-        fun newInstance(movieId: Int) = SuperheroesDetailFragment().apply {
+        fun newInstance(characterId: Int) = SuperheroesDetailFragment().apply {
             arguments = bundleOf(
-                MOVIE_ID to movieId
+                CHARACTER_ID to characterId
             )
         }
     }

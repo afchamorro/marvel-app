@@ -22,16 +22,10 @@ class SuperheroesDetailFragmentViewModel @Inject constructor(
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
 
-    //TODO
-    private var movieId: Long = 0
-    init {
-        movieId = 1009368
-    }
-
-    fun loadSuperheroDetail() {
+    fun loadSuperheroDetail(characterId: Long) {
         viewModelScope.launch {
             viewModelScope.launch {
-                getSuperheroDetails(GetSuperheroDetails.Params(movieId)) {
+                getSuperheroDetails(GetSuperheroDetails.Params(characterId)) {
                     it.fold(::handleFailure, ::handleSuccess)
                 }
             }

@@ -51,14 +51,16 @@ dependencies {
         retrofit_version = "2.9.0"
         okhttp_version = "4.9.3"
     }
+
     // Android KTX
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.collection:collection-ktx:1.2.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc01'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-rc01'
 
     //Lifeciclye
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-rc01'
 
     // Android UI and appcompat
     implementation 'androidx.appcompat:appcompat:1.4.1'

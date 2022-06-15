@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.acoders.marvelfanbook.R
 import com.acoders.marvelfanbook.core.extensions.diff
 import com.acoders.marvelfanbook.core.extensions.load
-import com.acoders.marvelfanbook.core.extensions.setupStatusBarColor
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.FragmentSuperheroesDetailBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
@@ -39,14 +37,9 @@ class SuperheroesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setStatusBar()
         setRecycleViewAdapter()
         updateUI()
         viewModel.loadSuperheroDetail()
-    }
-
-    private fun setStatusBar() {
-        requireActivity().setupStatusBarColor(R.color.black_trans_40)
     }
 
     private fun setRecycleViewAdapter() {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.launchAndCollect
@@ -25,10 +26,10 @@ class SuperheroesFragment : Fragment() {
     private var _binding: SuperheroesFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val superHeroesState = SuperHeroesState()
-    private val adapter: CompositeAdapter = CompositeAdapter.Builder().add(
-        SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) }
-    ).build()
+    private lateinit var superHeroesState: SuperHeroesState
+    private val adapter: CompositeAdapter = CompositeAdapter.Builder()
+        .add(SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) })
+        .build()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +41,8 @@ class SuperheroesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        superHeroesState = SuperHeroesState(findNavController())
 
         binding.apply {
             recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
@@ -62,7 +65,7 @@ class SuperheroesFragment : Fragment() {
     }
 
     private fun showLoading(show: Boolean) {
-        if (show) binding.loadingPb.visibility = View.VISIBLE else binding.loadingPb.visibility = View.GONE
+        if (show) binding.loadingPb.visible()  else binding.loadingPb.gone()
     }
 
 
@@ -72,9 +75,4 @@ class SuperheroesFragment : Fragment() {
 
     private fun bindSuperHeroesList(dataList: List<SuperheroView>) =
         adapter.submitList(dataList) { binding.recyclerview.scheduleLayoutAnimation() }
-
-
-    companion object {
-        fun newInstance() = SuperheroesFragment()
-    }
 }

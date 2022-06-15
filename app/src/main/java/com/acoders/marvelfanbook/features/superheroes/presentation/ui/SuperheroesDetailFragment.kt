@@ -34,7 +34,7 @@ class SuperheroesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadSuperheroDetail(arguments?.getLong(CHARACTER_ID) ?: 0)
+        viewModel.loadSuperheroDetail()
     }
 
     private fun setRecycleViewAdapter() {
@@ -43,15 +43,4 @@ class SuperheroesDetailFragment : Fragment() {
         )
     }
 
-    companion object {
-
-        private const val CHARACTER_ID = "characterId"
-
-        @JvmStatic
-        fun newInstance(characterId: Int) = SuperheroesDetailFragment().apply {
-            arguments = bundleOf(
-                CHARACTER_ID to characterId
-            )
-        }
-    }
 }

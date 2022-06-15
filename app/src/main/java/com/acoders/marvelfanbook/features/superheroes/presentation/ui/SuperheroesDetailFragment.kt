@@ -18,7 +18,7 @@ class SuperheroesDetailFragment : Fragment() {
     @Inject
     lateinit var recyclerAdapter: RecycleViewDelegateAdapter
 
-    private val viewModel: SuperheroesDetailFragmentViewModel by viewModels()
+    private val viewModel: SuperheroesDetailViewModel by viewModels()
 
     private var _binding: SuperheroesFragmentBinding? = null
     private val binding get() = _binding!!

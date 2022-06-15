@@ -12,9 +12,12 @@ interface SuperHeroDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveSuperHeroes(heroesList: List<SuperHeroEntity>)
 
-    @Query("SELECT * FROM super_heroes")
+    @Query("SELECT * FROM SuperHeroEntity")
     fun getSuperHeroesList(): Flow<List<SuperHeroEntity>>
 
-    @Query("SELECT COUNT(id) FROM super_heroes")
+    @Query("SELECT * FROM SuperHeroEntity WHERE id = :id")
+    fun getSuperHeroesById(id: Long): Flow<SuperHeroEntity>
+
+    @Query("SELECT COUNT(id) FROM SuperHeroEntity")
     suspend fun numHeroes(): Int
 }

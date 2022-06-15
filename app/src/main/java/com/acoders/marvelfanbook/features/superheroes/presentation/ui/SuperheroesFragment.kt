@@ -10,15 +10,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.launchAndCollect
 import com.acoders.marvelfanbook.core.extensions.visible
-import com.acoders.marvelfanbook.core.platform.delegateadapter.CompositeAdapter
+import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.SuperHeroViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SuperheroesFragment : Fragment() {
+
+    @Inject
+    lateinit var adapter: RecycleViewDelegateAdapter
 
     private val viewModel: SuperheroesViewModel by viewModels()
 
@@ -26,9 +30,6 @@ class SuperheroesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val superHeroesState = SuperHeroesState()
-    private val adapter: CompositeAdapter = CompositeAdapter.Builder().add(
-        SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) }
-    ).build()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +43,12 @@ class SuperheroesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            recyclerview.layoutManager =
+                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+
+            adapter.add(
+                SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) }
+            )
             recyclerview.adapter = adapter
         }
 
@@ -62,7 +68,8 @@ class SuperheroesFragment : Fragment() {
     }
 
     private fun showLoading(show: Boolean) {
-        if (show) binding.loadingPb.visibility = View.VISIBLE else binding.loadingPb.visibility = View.GONE
+        if (show) binding.loadingPb.visibility = View.VISIBLE else binding.loadingPb.visibility =
+            View.GONE
     }
 
 

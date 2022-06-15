@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.exception.toFailure
+import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroDetails
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
@@ -22,8 +23,8 @@ class SuperheroesDetailViewModel @Inject constructor(
     private val heroId: Long =
         SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
 
-    private val _state = MutableStateFlow(UiState())
-    val state: StateFlow<UiState> = _state.asStateFlow()
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     fun loadSuperheroDetail() {
         viewModelScope.launch {
@@ -38,16 +39,23 @@ class SuperheroesDetailViewModel @Inject constructor(
     }
 
     private fun handleFailure(failure: Failure) {
-        _state.update { it.copy(failure = failure) }
+        _uiState.update { it.copy(error = failure) }
     }
 
     private fun handleSuccess(superhero: Superhero) {
-        _state.update { it.copy(superheroView = superhero.toPresentationModel()) }
+        _uiState.update {
+            it.copy(
+                superheroView = superhero.toPresentationModel(),
+                dataList = arrayListOf(superhero.toDescriptionView())
+            )
+        }
     }
 
     data class UiState(
         val superheroView: SuperheroView? = null,
-        val failure: Failure? = null
+        val dataList: List<DelegateAdapterItem> = arrayListOf(),
+        val loading: Boolean = false,
+        val error: Failure? = null,
     )
 }
 

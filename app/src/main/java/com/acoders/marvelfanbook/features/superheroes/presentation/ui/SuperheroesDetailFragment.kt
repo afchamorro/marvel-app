@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
@@ -34,24 +33,12 @@ class SuperheroesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadSuperheroDetail(arguments?.getLong(CHARACTER_ID) ?: 0)
+        viewModel.loadSuperheroDetail()
     }
 
     private fun setRecycleViewAdapter() {
         recyclerAdapter.add(
             CharacterDescriptionAdapter()
         )
-    }
-
-    companion object {
-
-        private const val CHARACTER_ID = "characterId"
-
-        @JvmStatic
-        fun newInstance(characterId: Int) = SuperheroesDetailFragment().apply {
-            arguments = bundleOf(
-                CHARACTER_ID to characterId
-            )
-        }
     }
 }

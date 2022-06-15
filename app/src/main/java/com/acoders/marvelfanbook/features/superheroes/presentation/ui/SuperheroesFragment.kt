@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.launchAndCollect
 import com.acoders.marvelfanbook.core.extensions.visible
-import com.acoders.marvelfanbook.core.platform.delegateadapter.CompositeAdapter
+import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.SuperHeroViewAdapter
@@ -29,7 +30,7 @@ class SuperheroesFragment : Fragment() {
     private var _binding: SuperheroesFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val superHeroesState = SuperHeroesState()
+    private lateinit var superHeroesState: SuperHeroesState
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,12 @@ class SuperheroesFragment : Fragment() {
         superHeroesState = SuperHeroesState(findNavController())
 
         binding.apply {
-            recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            recyclerview.layoutManager =
+                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+
+            adapter.add(
+                SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) }
+            )
             recyclerview.adapter = adapter
         }
 

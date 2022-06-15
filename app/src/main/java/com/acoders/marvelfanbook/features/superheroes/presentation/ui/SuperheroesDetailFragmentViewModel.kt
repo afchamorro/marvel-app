@@ -1,5 +1,6 @@
 package com.acoders.marvelfanbook.features.superheroes.presentation.ui
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acoders.marvelfanbook.core.exception.Failure
@@ -19,7 +20,8 @@ class SuperheroesDetailFragmentViewModel @Inject constructor(
     private val getSuperheroDetails: GetSuperheroDetails
 ) : ViewModel() {
 
-    private val heroId: Long =  SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
+    private val heroId: Long =
+        SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
 
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
@@ -38,7 +40,7 @@ class SuperheroesDetailFragmentViewModel @Inject constructor(
         _state.value = state.value.copy(failure = failure)
     }
 
-    private fun handleSuccess(superhero: Superhero){
+    private fun handleSuccess(superhero: Superhero) {
         _state.value = state.value.copy(superheroView = superhero.toPresentationModel())
     }
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.launchAndCollect
 import com.acoders.marvelfanbook.core.extensions.visible
-import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
+import com.acoders.marvelfanbook.core.platform.delegateadapter.CompositeAdapter
 import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.SuperHeroViewAdapter
@@ -42,13 +42,10 @@ class SuperheroesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            recyclerview.layoutManager =
-                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        superHeroesState = SuperHeroesState(findNavController())
 
-            adapter.add(
-                SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) }
-            )
+        binding.apply {
+            recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             recyclerview.adapter = adapter
         }
 
@@ -79,9 +76,4 @@ class SuperheroesFragment : Fragment() {
 
     private fun bindSuperHeroesList(dataList: List<SuperheroView>) =
         adapter.submitList(dataList) { binding.recyclerview.scheduleLayoutAnimation() }
-
-
-    companion object {
-        fun newInstance() = SuperheroesFragment()
-    }
 }

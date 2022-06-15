@@ -15,17 +15,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SuperheroesDetailFragmentViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     private val getSuperheroDetails: GetSuperheroDetails
-) :
-    ViewModel() {
+) : ViewModel() {
+
+    private val heroId: Long =  SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
 
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
 
-    fun loadSuperheroDetail(characterId: Long) {
+    fun loadSuperheroDetail() {
         viewModelScope.launch {
             viewModelScope.launch {
-                getSuperheroDetails(GetSuperheroDetails.Params(characterId)) {
+                getSuperheroDetails(GetSuperheroDetails.Params(heroId)) {
                     it.fold(::handleFailure, ::handleSuccess)
                 }
             }

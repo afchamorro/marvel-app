@@ -7,6 +7,8 @@ interface SuperHeroesLocalDataSource {
 
     fun getSuperHeroesList(): Flow<List<Superhero>>
 
+    fun getSuperHeroesById(id: Long): Flow<Superhero>
+
     suspend fun save(heroesList: List<Superhero>)
 
     suspend fun isEmpty(): Boolean

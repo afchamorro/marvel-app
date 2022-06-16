@@ -6,13 +6,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class SuperHeroesLocalDataSourceImpl @Inject constructor(private val superHeroDao: SuperHeroDao) : SuperHeroesLocalDataSource {
+class SuperHeroesLocalDataSourceImpl @Inject constructor(private val superHeroDao: SuperHeroDao) :
+    SuperHeroesLocalDataSource {
 
-    override fun getSuperHeroesList(): Flow<List<Superhero>> = superHeroDao.getSuperHeroesList().map { it.toDomainModel() }
+    override fun getSuperHeroesList(): Flow<List<Superhero>> =
+        superHeroDao.getSuperHeroesList().map { it.toDomainModel() }
 
-    override suspend fun save(heroesList: List<Superhero>) {
+    override fun getSuperHeroesById(id: Long): Flow<Superhero> =
+        superHeroDao.getSuperHeroesById(id).map { it.toDomainModel() }
+
+    override suspend fun save(heroesList: List<Superhero>) =
         superHeroDao.saveSuperHeroes(heroesList.toEntityModel())
-    }
 
     override suspend fun isEmpty(): Boolean = superHeroDao.numHeroes() == 0
 }

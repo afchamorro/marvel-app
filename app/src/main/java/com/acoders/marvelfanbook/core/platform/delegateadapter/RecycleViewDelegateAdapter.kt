@@ -9,17 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 class RecycleViewDelegateAdapter :
     ListAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>(DelegateAdapterItemDiffCallback()) {
 
-    var reachLimitsListener: ReachLimitsListener? = null
-
-    var limitItemsPage: Int = DEFAULT_LIMIT
-
-    private var _positionOfLastItem: Int = -1
-
-    private var _lastPage: Int = 1
-    val lastPage: Int
-        get() = _lastPage
-
-    private lateinit var delegates: SparseArray<DelegateAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>>
+    private var delegates: SparseArray<DelegateAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>> =
+        SparseArray()
 
     fun add(delegateAdapter: DelegateAdapter<out DelegateAdapterItem, *>) {
         delegates.put(
@@ -59,31 +50,6 @@ class RecycleViewDelegateAdapter :
         } else {
             throw NullPointerException("can not find adapter for position $position")
         }
-
-        if (hasScrollPagination()) {
-            handlePagination(position)
-        }
-    }
-
-    private fun handlePagination(position: Int) {
-        if (checkEndReaching(position) && checkIsRemainItems()) {
-            if (_positionOfLastItem != position) {
-                _positionOfLastItem = position
-                reachLimitsListener!!.onLastItem(this, position, ++_lastPage)
-            }
-        }
-    }
-
-    private fun hasScrollPagination(): Boolean {
-        return reachLimitsListener != null
-    }
-
-    private fun checkEndReaching(position: Int): Boolean {
-        return itemCount - ELEMENTS_PAGE_MARGIN_BOTTOM == position
-    }
-
-    private fun checkIsRemainItems(): Boolean {
-        return limitItemsPage > 1
     }
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
@@ -99,10 +65,5 @@ class RecycleViewDelegateAdapter :
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         delegates[holder.itemViewType].onViewAttachedToWindow(holder)
         super.onViewAttachedToWindow(holder)
-    }
-
-    companion object {
-        private const val DEFAULT_LIMIT = 30
-        private const val ELEMENTS_PAGE_MARGIN_BOTTOM = 1
     }
 }

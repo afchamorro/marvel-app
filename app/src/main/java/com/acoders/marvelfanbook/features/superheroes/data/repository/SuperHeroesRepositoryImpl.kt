@@ -24,10 +24,10 @@ class SuperHeroesRepositoryImpl @Inject constructor(
     override fun getSuperHeroesList(): Flow<List<Superhero>> = localDataSource.getSuperHeroesList()
 
     override suspend fun fetchHeroesList(): Failure? {
-        if(!localDataSource.isEmpty()) return null
+        if (!localDataSource.isEmpty()) return null
 
         return when (networkHandler.isNetworkAvailable()) {
-            true  -> request(
+            true -> request(
                 {
                     remoteDataSource.superheroes()
                 },
@@ -57,17 +57,8 @@ class SuperHeroesRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun superHero(id: Long): Either<Failure, Superhero> {
-        return when (networkHandler.isNetworkAvailable()) {
-            true  -> request(
-                {
-                    remoteDataSource.superhero(id)
-                },
-                ::getResponseAsSuperhero,
-                Wrapper(data = SuperheroDto.empty)
-            )
-            false -> Either.Left(Failure.Connectivity)
-        }
+    override fun superHero(id: Long):Flow<Superhero> {
+        return localDataSource.getSuperHeroesById(id)
     }
 
     private fun getResponseAsSuperhero(wrapper: Wrapper<SuperheroDto>): Superhero {

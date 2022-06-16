@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.acoders.marvelfanbook.features.common.domain.models.Thumbnail
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 
-@Entity(tableName = "super_heroes")
+@Entity
 data class SuperHeroEntity(
     @PrimaryKey
     val id: Long,

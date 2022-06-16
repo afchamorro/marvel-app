@@ -1,7 +1,6 @@
 package com.acoders.marvelfanbook.features.superheroes.presentation.model
 
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
-import com.acoders.marvelfanbook.features.common.domain.models.Thumbnail
 import com.acoders.marvelfanbook.features.common.presentation.model.ThumbnailView
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 
@@ -17,16 +16,16 @@ data class SuperheroView(
     }
 
     override fun content(): Any {
-        return SuperheroviewContent(name, thumbnail)
+        return SuperheroViewContent(name, thumbnail)
     }
 
-    inner class SuperheroviewContent(
+    inner class SuperheroViewContent(
         val name: String,
         val thumbnail: ThumbnailView
     ) {
 
         override fun equals(other: Any?): Boolean {
-            return other is SuperheroviewContent
+            return other is SuperheroViewContent
                     && other.name == this.name
                     && other.thumbnail == this.thumbnail
         }

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MarvelFanBook.NoActionBar">
+        android:theme="@style/Theme.MarvelFanBook.SplashTheme">
         <activity
             android:name="com.acoders.marvelfanbook.MainActivity"
             android:exported="true">

@@ -11,7 +11,6 @@ import com.acoders.marvelfanbook.features.superheroes.domain.repository.Superher
 import com.acoders.marvelfanbook.features.superheroes.framework.remote.SuperheroDto
 import com.acoders.marvelfanbook.framework.remote.schemes.common.Paginated
 import com.acoders.marvelfanbook.framework.remote.schemes.common.PaginatedWrapper
-import com.acoders.marvelfanbook.framework.remote.schemes.common.Wrapper
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -59,11 +58,5 @@ class SuperHeroesRepositoryImpl @Inject constructor(
 
     override fun superHero(id: Long):Flow<Superhero> {
         return localDataSource.getSuperHeroesById(id)
-    }
-
-    private fun getResponseAsSuperhero(wrapper: Wrapper<SuperheroDto>): Superhero {
-        wrapper.apply {
-            return data.asDomainModel()
-        }
     }
 }

@@ -15,6 +15,7 @@
         android:theme="@style/Theme.MarvelFanBook.SplashTheme">
         <activity
             android:name="com.acoders.marvelfanbook.MainActivity"
+            android:theme="@style/Theme.MarvelFanBook.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

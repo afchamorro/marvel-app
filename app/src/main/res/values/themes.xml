@@ -22,4 +22,13 @@
         <item name="android:statusBarColor">@color/black_trans_20</item>
     </style>
 
+    <style name="Theme.MarvelFanBook.SplashTheme" parent="Theme.SplashScreen">
+        <item name="colorPrimary">@color/primary_500</item>
+        <item name="colorPrimaryDark">@color/primary_700</item>
+        <item name="windowSplashScreenBackground">@color/splash_color</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:navigationBarColor">@color/primary_500</item>
+        <item name="postSplashScreenTheme">@style/Theme.MarvelFanBook</item>
+    </style>
+
 </resources>

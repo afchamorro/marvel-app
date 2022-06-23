@@ -1,9 +1,7 @@
 package com.acoders.marvelfanbook.features.superheroes.data.repository
 
-import arrow.core.Either
 import com.acoders.marvelfanbook.core.exception.Failure
-import com.acoders.marvelfanbook.core.platform.NetworkHandler
-import com.acoders.marvelfanbook.core.respository.BaseRepository
+import com.acoders.marvelfanbook.core.extensions.tryCall
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.AttributionInfoLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesRemoteDataSource
@@ -16,44 +14,38 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SuperHeroesRepositoryImpl @Inject constructor(
-    private val networkHandler: NetworkHandler,
     private val remoteDataSource: SuperHeroesRemoteDataSource,
     private val localDataSource: SuperHeroesLocalDataSource,
     private val attributionInfoLocalDataSource: AttributionInfoLocalDataSource
-) : BaseRepository(), SuperheroesRepository {
+) : SuperheroesRepository {
 
     override fun getSuperHeroesList(): Flow<List<Superhero>> = localDataSource.getSuperHeroesList()
 
     override suspend fun fetchHeroesList(): Failure? {
         if (!localDataSource.isEmpty()) return null
 
-        return when (networkHandler.isNetworkAvailable()) {
-            true -> request(
-                {
-                    remoteDataSource.superheroes()
-                },
-                ::getResponseAsSuperheroesList,
-                PaginatedWrapper(data = Paginated(results = listOf(SuperheroDto.empty)))
-            )
-            false -> Either.Left(Failure.Connectivity)
-        }.fold({
-            it
+        val result = tryCall {
+            remoteDataSource.superheroes().getResponseAsSuperheroesList()
+        }
+
+        result.fold({
+            return it
         }, {
             localDataSource.save(it.data.results)
             attributionInfoLocalDataSource.saveAttributionLink(it.attributionHTML)
-            null
+            return null
         })
     }
 
-    private fun getResponseAsSuperheroesList(wrapper: PaginatedWrapper<SuperheroDto>): PaginatedWrapper<Superhero> {
+    private fun PaginatedWrapper<SuperheroDto>.getResponseAsSuperheroesList(): PaginatedWrapper<Superhero> {
         return PaginatedWrapper(
-            attributionHTML = wrapper.attributionHTML,
+            attributionHTML = attributionHTML,
             data = Paginated(
-                offset = wrapper.data.offset,
-                limit = wrapper.data.limit,
-                total = wrapper.data.total,
-                count = wrapper.data.count,
-                results = wrapper.data.results.map { it.asDomainModel() })
+                offset = data.offset,
+                limit = data.limit,
+                total = data.total,
+                count = data.count,
+                results = data.results.map { it.asDomainModel() })
         )
     }
 
@@ -63,5 +55,4 @@ class SuperHeroesRepositoryImpl @Inject constructor(
 
     override fun getAttributionLink(): Flow<String> =
         attributionInfoLocalDataSource.getAttributionLink()
-
 }

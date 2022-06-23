@@ -14,7 +14,7 @@ interface MarvelEndpoints {
     suspend fun getSuperheroes(
         @Query("series", encoded = true) series: String,
         @Query("limit") limit: Int
-    ): Response<PaginatedWrapper<SuperheroDto>>
+    ): PaginatedWrapper<SuperheroDto>
 
     @GET("characters/{characterId}")
     suspend fun getSuperheroDetails(@Path("characterId") characterId: Long): Response<Wrapper<SuperheroDto>>

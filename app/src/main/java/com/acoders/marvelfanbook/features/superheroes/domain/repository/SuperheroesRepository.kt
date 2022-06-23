@@ -11,4 +11,6 @@ interface SuperheroesRepository {
     suspend fun fetchHeroesList(): Failure?
 
     fun superHero(id: Long): Flow<Superhero>
+
+    fun getAttributionLink() : Flow<String>
 }

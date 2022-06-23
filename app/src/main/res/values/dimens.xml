@@ -4,4 +4,5 @@
     <dimen name="superhero_card_height">200dp</dimen>
     <dimen name="superhero_card_margin">2dp</dimen>
     <dimen name="superhero_card_corners_radius">6dp</dimen>
+    <dimen name="attribution_message_height">30dp</dimen>
 </resources>

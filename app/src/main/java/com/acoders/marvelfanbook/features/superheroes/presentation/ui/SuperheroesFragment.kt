@@ -1,6 +1,7 @@
 package com.acoders.marvelfanbook.features.superheroes.presentation.ui
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.acoders.marvelfanbook.core.extensions.diff
 import com.acoders.marvelfanbook.core.extensions.gone
+import com.acoders.marvelfanbook.core.extensions.htmlSpan
 import com.acoders.marvelfanbook.core.extensions.visible
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
@@ -32,6 +34,11 @@ class SuperheroesFragment : Fragment() {
 
     private lateinit var superHeroesState: SuperHeroesState
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        superHeroesState = SuperHeroesState(findNavController())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,10 +49,12 @@ class SuperheroesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        superHeroesState = SuperHeroesState(findNavController())
         setRecyclerViewAdapter()
-        viewModel.fetchSuperHeroes()
         updateUI()
+        viewModel.apply {
+            getAttributionLink()
+            fetchSuperHeroes()
+        }
     }
 
     private fun setRecyclerViewAdapter() {
@@ -71,6 +80,10 @@ class SuperheroesFragment : Fragment() {
                 bindSuperHeroesList(it)
             }
 
+            diff(viewLifecycleOwner, { it.attributionLink }) {
+                bindAttributionLink(it)
+            }
+
             diff(viewLifecycleOwner, { it.error }) {
                 showError(it != null)
             }
@@ -83,6 +96,13 @@ class SuperheroesFragment : Fragment() {
     private fun showLoading(show: Boolean) {
         if (show) binding.loadingPb.visibility = View.VISIBLE else binding.loadingPb.visibility =
             View.GONE
+    }
+
+    private fun bindAttributionLink(link: String){
+        binding.attributionTv.apply {
+            text = link.htmlSpan()
+            movementMethod = LinkMovementMethod()
+        }
     }
 
     private fun showError(show: Boolean) {

@@ -23,10 +23,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/attribution_message_height"
         android:clipToPadding="false"
         android:layoutAnimation="@anim/grid_layout_animation"
         android:padding="@dimen/superhero_card_margin"
@@ -49,5 +51,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/attributionTv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/attribution_message_height"
+        android:layout_gravity="bottom"
+        android:background="@color/primary_700"
+        android:gravity="center"
+        android:linksClickable="true"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

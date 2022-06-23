@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.platform.NetworkHandler
 import com.acoders.marvelfanbook.core.respository.BaseRepository
+import com.acoders.marvelfanbook.features.superheroes.data.datasource.AttributionInfoLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesRemoteDataSource
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class SuperHeroesRepositoryImpl @Inject constructor(
     private val networkHandler: NetworkHandler,
     private val remoteDataSource: SuperHeroesRemoteDataSource,
-    private val localDataSource: SuperHeroesLocalDataSource
+    private val localDataSource: SuperHeroesLocalDataSource,
+    private val attributionInfoLocalDataSource: AttributionInfoLocalDataSource
 ) : BaseRepository(), SuperheroesRepository {
 
     override fun getSuperHeroesList(): Flow<List<Superhero>> = localDataSource.getSuperHeroesList()
@@ -38,15 +40,14 @@ class SuperHeroesRepositoryImpl @Inject constructor(
             it
         }, {
             localDataSource.save(it.data.results)
+            attributionInfoLocalDataSource.saveAttributionLink(it.attributionHTML)
             null
-        }
-        )
-
+        })
     }
 
     private fun getResponseAsSuperheroesList(wrapper: PaginatedWrapper<SuperheroDto>): PaginatedWrapper<Superhero> {
         return PaginatedWrapper(
-            attributionText = wrapper.attributionText,
+            attributionHTML = wrapper.attributionHTML,
             data = Paginated(
                 offset = wrapper.data.offset,
                 limit = wrapper.data.limit,
@@ -56,7 +57,11 @@ class SuperHeroesRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun superHero(id: Long):Flow<Superhero> {
+    override fun superHero(id: Long): Flow<Superhero> {
         return localDataSource.getSuperHeroesById(id)
     }
+
+    override fun getAttributionLink(): Flow<String> =
+        attributionInfoLocalDataSource.getAttributionLink()
+
 }

@@ -15,7 +15,5 @@
     <dimen name="superhero_card_margin">2dp</dimen>
     <dimen name="superhero_card_corners_radius">6dp</dimen>
     <dimen name="attribution_message_height">30dp</dimen>
-
-    <dimen name="toolbarExpandedTitleMarginBottom">30dp</dimen>
-    <dimen name="toolbarExpandedTitleMarginStart">72dp</dimen>
+    <dimen name="imageShadowHeight">100dp</dimen>
 </resources>

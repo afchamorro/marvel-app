@@ -28,11 +28,14 @@
     <style name="SuperheroCollapsingToolbarLayoutStyle">
         <item name="collapsedTitleTextAppearance">@style/TextAppearance.App.CollapsingToolbar.Collapsed</item>
         <item name="contentScrim">?attr/colorPrimary</item>
-        <item name="expandedTitleMarginBottom">@dimen/toolbarExpandedTitleMarginBottom</item>
-        <item name="expandedTitleMarginStart">@dimen/toolbarExpandedTitleMarginStart</item>
+
         <item name="expandedTitleTextAppearance">@style/TextAppearance.App.CollapsingToolbar.Expanded</item>
         <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
         <item name="statusBarScrim">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="SuperheroToolbarShadowStyle">
+        <item name="android:layout_gravity">bottom</item>
     </style>
 
     <style name="SuperheroRecycleViewStyle">

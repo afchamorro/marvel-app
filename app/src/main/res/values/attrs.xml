@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="toolbarElevation" format="reference" />
+    <attr name="toolbarTextColor" format="reference" />
+    <attr name="bodyTextColor" format="reference" />
+    <attr name="spaceHuge" format="reference" />
+    <attr name="spaceDouble" format="reference" />
+    <attr name="spaceBig" format="reference" />
+    <attr name="spaceRegular" format="reference" />
+    <attr name="spaceSmall" format="reference" />
+    <attr name="spaceHalf" format="reference" />
+    <attr name="spaceLessHalf" format="reference" />
+    <attr name="spaceTiny" format="reference" />
+</resources>

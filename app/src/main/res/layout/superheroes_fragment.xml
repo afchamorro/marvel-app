@@ -53,14 +53,11 @@
         android:indeterminate="true" />
 
     <TextView
+        style="@style/AttributionLinkStyle"
         android:id="@+id/attributionTv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/attribution_message_height"
         android:layout_gravity="bottom"
-        android:background="@color/primary_700"
-        android:gravity="center"
-        android:linksClickable="true"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:linksClickable="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

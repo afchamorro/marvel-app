@@ -1,9 +1,8 @@
 package com.acoders.marvelfanbook.framework.remote.api
 
+import com.acoders.marvelfanbook.features.comics.framework.model.ComicDto
+import com.acoders.marvelfanbook.features.common.framework.remote.PaginatedWrapper
 import com.acoders.marvelfanbook.features.superheroes.framework.remote.SuperheroDto
-import com.acoders.marvelfanbook.framework.remote.schemes.common.PaginatedWrapper
-import com.acoders.marvelfanbook.framework.remote.schemes.common.Wrapper
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,6 +15,6 @@ interface MarvelEndpoints {
         @Query("limit") limit: Int
     ): PaginatedWrapper<SuperheroDto>
 
-    @GET("characters/{characterId}")
-    suspend fun getSuperheroDetails(@Path("characterId") characterId: Long): Response<Wrapper<SuperheroDto>>
+    @GET("characters/{characterId}/comics")
+    suspend fun getSuperheroComics(@Path("characterId") characterId: Long): PaginatedWrapper<ComicDto>
 }

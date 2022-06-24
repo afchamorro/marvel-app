@@ -11,6 +11,7 @@ import com.acoders.marvelfanbook.core.extensions.diff
 import com.acoders.marvelfanbook.core.extensions.load
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.FragmentSuperheroesDetailBinding
+import com.acoders.marvelfanbook.features.comics.presentation.ui.adapter.ComicsSliderAdapter
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.CharacterDescriptionAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,13 +40,17 @@ class SuperheroesDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setRecycleViewAdapter()
         updateUI()
-        viewModel.loadSuperheroDetail()
+        viewModel.apply {
+            loadSuperheroDetail()
+            loadSuperheroComics()
+        }
     }
 
     private fun setRecycleViewAdapter() {
-        recyclerAdapter.add(
-            CharacterDescriptionAdapter()
-        )
+        recyclerAdapter.apply {
+            add(CharacterDescriptionAdapter())
+            add(ComicsSliderAdapter())
+        }
 
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(context)

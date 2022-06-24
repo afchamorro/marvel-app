@@ -1,7 +1,7 @@
 package com.acoders.marvelfanbook.features.superheroes.framework.remote
 
+import com.acoders.marvelfanbook.features.common.framework.remote.ThumbnailDto
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
-import com.acoders.marvelfanbook.framework.remote.schemes.common.ThumbnailDto
 
 data class SuperheroDto(
     val id: Long = 0,

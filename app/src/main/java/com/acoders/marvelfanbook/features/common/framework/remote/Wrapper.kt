@@ -1,4 +1,4 @@
-package com.acoders.marvelfanbook.framework.remote.schemes.common
+package com.acoders.marvelfanbook.features.common.framework.remote
 
 data class Wrapper<A>(
     val code: Int = 0,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 

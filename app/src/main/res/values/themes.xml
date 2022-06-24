@@ -40,6 +40,7 @@
         <item name="colorPrimary">@color/primary_500</item>
         <item name="colorPrimaryDark">@color/primary_700</item>
         <item name="windowSplashScreenBackground">@color/splash_color</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_mv_logo</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:navigationBarColor">@color/primary_500</item>
         <item name="postSplashScreenTheme">@style/Theme.MarvelFanBook</item>

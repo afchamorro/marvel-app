@@ -16,8 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.acoders.marvelfanbook.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MarvelFanBook.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

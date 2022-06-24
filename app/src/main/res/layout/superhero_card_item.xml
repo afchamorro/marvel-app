@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
+    style="@style/SuperheroCardViewStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/superhero_card_margin"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/superhero_card_corners_radius">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,18 +21,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            style="@style/SuperheroNameStyle"
             android:id="@+id/heroe_name_tv"
-            tools:text="Iron Man"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
-            android:padding="8dp"
-            android:minLines="2"
-            android:maxLines="3"
-            android:background="@drawable/title_gradient_black_bg"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

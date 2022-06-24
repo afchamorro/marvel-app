@@ -7,7 +7,7 @@ import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.exception.toFailure
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
-import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroDetails
+import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroDetailsUseCase
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SuperheroesDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getSuperheroDetails: GetSuperheroDetails
+    private val getSuperheroDetailsUseCase: GetSuperheroDetailsUseCase
 ) : ViewModel() {
 
     private val heroId: Long =
@@ -29,7 +29,7 @@ class SuperheroesDetailViewModel @Inject constructor(
     fun loadSuperheroDetail() {
         viewModelScope.launch {
             viewModelScope.launch {
-                getSuperheroDetails(heroId).catch {
+                getSuperheroDetailsUseCase(heroId).catch {
                     handleFailure(it.toFailure())
                 }.collect {
                     handleSuccess(it)

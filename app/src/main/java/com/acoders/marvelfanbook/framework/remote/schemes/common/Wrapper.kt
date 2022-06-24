@@ -2,7 +2,7 @@ package com.acoders.marvelfanbook.framework.remote.schemes.common
 
 data class Wrapper<A>(
     val code: Int = 0,
-    val attributionText: String = "",
+    val attributionHTML: String = "",
     val data: A
 )
 

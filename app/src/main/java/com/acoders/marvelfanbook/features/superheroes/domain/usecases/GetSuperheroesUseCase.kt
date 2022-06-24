@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetSuperheroes @Inject constructor(private val repository: SuperheroesRepository) {
+class GetSuperheroesUseCase @Inject constructor(private val repository: SuperheroesRepository) {
 
+    //TODO, CREO QUE DEBEMOS DEVOLER EL SUPERHERO Y MAPEARLO EN EL VIEWMODEL
     operator fun invoke(): Flow<List<SuperheroView>> =
         repository.getSuperHeroesList().map { heroes -> heroes.map { it.toPresentationModel() } }
 }

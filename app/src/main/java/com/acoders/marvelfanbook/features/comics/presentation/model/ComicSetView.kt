@@ -3,7 +3,7 @@ package com.acoders.marvelfanbook.features.comics.presentation.model
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
 
 data class ComicSetView(
-    val comics: List<ComicView> = arrayListOf()
+    val comics: List<DelegateAdapterItem> = arrayListOf()
 ) : DelegateAdapterItem {
 
     override fun id() = comics.size
@@ -11,7 +11,7 @@ data class ComicSetView(
     override fun content() = ComicSetViewViewContent(comics)
 
     inner class ComicSetViewViewContent(
-        val comics: List<ComicView>
+        val comics: List<DelegateAdapterItem>
     ) {
         override fun equals(other: Any?): Boolean {
             if (other is ComicSetViewViewContent) {
@@ -26,5 +26,16 @@ data class ComicSetView(
         override fun hashCode(): Int {
             return comics.hashCode()
         }
+    }
+
+
+    companion object {
+        val emptySkeleton = ComicSetView(
+            comics = arrayListOf(
+                ComicSkeletonView(),
+                ComicSkeletonView(),
+                ComicSkeletonView()
+            )
+        )
     }
 }

@@ -9,6 +9,7 @@ import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterIt
 import com.acoders.marvelfanbook.features.comics.domain.caseuse.GetSuperheroComics
 import com.acoders.marvelfanbook.features.comics.domain.model.Comic
 import com.acoders.marvelfanbook.features.comics.presentation.model.ComicSetView
+import com.acoders.marvelfanbook.features.comics.presentation.model.ComicSetView.Companion.emptySkeleton
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroDetailsUseCase
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.DescriptionView
@@ -29,7 +30,7 @@ class SuperheroesDetailViewModel @Inject constructor(
         SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
 
     private var descriptionView: DescriptionView = DescriptionView("")
-    private var comicSetView: ComicSetView = ComicSetView()
+    private var comicSetView: ComicSetView = emptySkeleton
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()

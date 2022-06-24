@@ -66,4 +66,14 @@
         <item name="android:background">@drawable/title_gradient_black_bg</item>
     </style>
 
+    <style name="SkeletonStyle">
+        <item name="shimmer_auto_start">false</item>
+        <item name="shimmer_base_alpha">100</item>
+        <item name="shimmer_base_color">?skeletonBaseColor</item>
+        <item name="shimmer_colored">true</item>
+        <item name="shimmer_highlight_color">?skeletonHighlightColor</item>
+        <item name="shimmer_repeat_mode">restart</item>
+        <item name="shimmer_tilt">10</item>
+    </style>
+
 </resources>

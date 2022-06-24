@@ -37,13 +37,15 @@ class ComicsSliderAdapter : DelegateAdapter<ComicSetView, ComicsSliderAdapter.Vi
         fun bind(item: ComicSetView) {
 
             val recycleViewAdapter =
-                RecycleViewDelegateAdapter().apply { add(ComicViewAdapter()) }
+                RecycleViewDelegateAdapter().apply {
+                    add(ComicViewAdapter())
+                    add(ComicSkeletonViewAdapter())
+                }
 
             val layoutManager =
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
 
             binding.apply {
-
                 recycleViewAdapter.let { compositeAdapter ->
                     dataListRv.layoutManager = layoutManager
                     dataListRv.adapter = compositeAdapter

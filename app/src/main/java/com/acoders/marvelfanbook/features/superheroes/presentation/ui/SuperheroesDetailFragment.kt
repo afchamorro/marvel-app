@@ -29,7 +29,8 @@ class SuperheroesDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSuperheroesDetailBinding.inflate(inflater, container, false)
@@ -42,7 +43,6 @@ class SuperheroesDetailFragment : Fragment() {
         updateUI()
         viewModel.apply {
             loadSuperheroDetail()
-            loadSuperheroComics()
         }
     }
 
@@ -92,7 +92,7 @@ class SuperheroesDetailFragment : Fragment() {
     }
 
     private fun showError(show: Boolean) {
-        //TODO SNACKA BAR if (show) binding.errorTv.visible() else binding.errorTv.gone()
+        // TODO SNACKA BAR if (show) binding.errorTv.visible() else binding.errorTv.gone()
     }
 
     override fun onDestroyView() {

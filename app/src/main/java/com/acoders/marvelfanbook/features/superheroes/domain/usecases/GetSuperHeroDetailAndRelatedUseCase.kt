@@ -1,17 +1,16 @@
 package com.acoders.marvelfanbook.features.superheroes.domain.usecases
 
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
-import com.acoders.marvelfanbook.features.comics.domain.repository.ComicsRepository
+import com.acoders.marvelfanbook.features.comics.domain.caseuse.GetSuperheroComicsUseCase
 import com.acoders.marvelfanbook.features.comics.presentation.model.ComicSetView
-import com.acoders.marvelfanbook.features.superheroes.domain.repository.SuperheroesRepository
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.DescriptionView
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetSuperHeroDetailAndRelatedUseCase @Inject constructor(
-    private val superheroesRepository: SuperheroesRepository,
-    private val comicsRepository: ComicsRepository
+    private val getSuperheroDetailsUseCase: GetSuperheroDetailsUseCase,
+    private val getSuperheroComicsUseCase: GetSuperheroComicsUseCase
 ) {
 
     suspend operator fun invoke(id: Long): Flow<List<DelegateAdapterItem>> = flow {
@@ -21,14 +20,14 @@ class GetSuperHeroDetailAndRelatedUseCase @Inject constructor(
 
         emit(listOf(descriptionView, comicSetView))
 
-        comicsRepository.getSuperheroComics(id).fold({
+        getSuperheroComicsUseCase(id).fold({
             throw Exception(it.toString())
         }, { comics ->
             comicSetView = ComicSetView(comics.map { it.toPresentationModel() })
             emit(listOf(descriptionView, comicSetView))
         })
 
-        superheroesRepository.superHero(id).collect {
+        getSuperheroDetailsUseCase(id).collect {
             descriptionView = it.toDescriptionView()
             emit(listOf(descriptionView, comicSetView))
         }

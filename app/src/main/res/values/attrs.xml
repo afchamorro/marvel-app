@@ -13,4 +13,5 @@
     <attr name="spaceTiny" format="reference" />
     <attr name="skeletonBaseColor" format="reference" />
     <attr name="skeletonHighlightColor" format="reference" />
+    <attr name="fontFamilyBold" format="reference" />
 </resources>

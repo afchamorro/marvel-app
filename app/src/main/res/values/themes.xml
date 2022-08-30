@@ -31,6 +31,10 @@
 
         <item name="skeletonBaseColor">@color/primary_900</item>
         <item name="skeletonHighlightColor">@color/primary_800</item>
+
+        <!-- Text -->
+        <item name="android:fontFamily">@font/marvel_family</item>
+        <item name="fontFamilyBold">@font/american_captain_bold</item>
     </style>
 
     <style name="Theme.MarvelFanBook.NoActionBar">

@@ -44,7 +44,7 @@
     </style>
 
     <style name="SuperheroDescriptionStyle">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Body1</item>
         <item name="android:lineSpacingExtra">4dp</item>
         <item name="android:textColor">?bodyTextColor</item>
         <item name="android:padding">?spaceRegular</item>
@@ -52,7 +52,8 @@
 
     <!-- Comics -->
     <style name="ComicSectionTitleStyle">
-        <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Headline5</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Headline6</item>
         <item name="android:textColor">?bodyTextColor</item>
         <item name="android:padding">?spaceRegular</item>
     </style>

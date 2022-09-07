@@ -6,8 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.exception.toFailure
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
+import com.acoders.marvelfanbook.features.comics.domain.caseuse.GetSuperheroComicsUseCase
+import com.acoders.marvelfanbook.features.comics.presentation.model.ComicSkeletonView
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
-import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperHeroDetailAndRelatedUseCase
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroDetailsUseCase
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class SuperheroesDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getSuperheroDetailsUseCase: GetSuperheroDetailsUseCase,
-    private val getSuperHeroDetailAndRelatedUseCase: GetSuperHeroDetailAndRelatedUseCase
+    private val getSuperheroComicsUseCase: GetSuperheroComicsUseCase
 ) : ViewModel() {
 
     private val heroId: Long =
@@ -30,20 +31,24 @@ class SuperheroesDetailViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getSuperHeroDetailAndRelatedUseCase(heroId)
-                .catch { cause -> handleFailure(cause.toFailure()) }
-                .collect { data -> handleSuccess(data) }
+            getSuperheroComicsUseCase(heroId).fold({
+                handleFailure(it)
+            }, { comics ->
+                _uiState.update {
+                    val comicsList: List<DelegateAdapterItem> =
+                        comics.map { comic -> comic.toPresentationModel() }
+                    it.copy(comics = comicsList)
+                }
+            })
         }
     }
 
     fun loadSuperheroDetail() {
         viewModelScope.launch {
-            viewModelScope.launch {
-                getSuperheroDetailsUseCase(heroId).catch {
-                    handleFailure(it.toFailure())
-                }.collect {
-                    handleSuperHeroSuccess(it)
-                }
+            getSuperheroDetailsUseCase(heroId).catch {
+                handleFailure(it.toFailure())
+            }.collect {
+                handleSuperHeroSuccess(it)
             }
         }
     }
@@ -58,12 +63,9 @@ class SuperheroesDetailViewModel @Inject constructor(
 
     private fun handleFailure(failure: Failure) = _uiState.update { it.copy(error = failure) }
 
-    private fun handleSuccess(dataList: List<DelegateAdapterItem>) =
-        _uiState.update { it.copy(dataList = dataList) }
-
     data class UiState(
         val superheroView: SuperheroView? = null,
-        val dataList: List<DelegateAdapterItem> = arrayListOf(),
+        val comics: List<DelegateAdapterItem> = ComicSkeletonView.emptySkeleton,
         val loading: Boolean = false,
         val error: Failure? = null,
     )

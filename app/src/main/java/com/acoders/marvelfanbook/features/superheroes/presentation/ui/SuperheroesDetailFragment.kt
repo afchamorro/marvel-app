@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acoders.marvelfanbook.core.extensions.diff
 import com.acoders.marvelfanbook.core.extensions.load
+import com.acoders.marvelfanbook.core.extensions.visible
+import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
 import com.acoders.marvelfanbook.databinding.FragmentSuperheroesDetailBinding
-import com.acoders.marvelfanbook.features.comics.presentation.ui.adapter.ComicsSliderAdapter
+import com.acoders.marvelfanbook.features.comics.presentation.ui.adapter.ComicSkeletonViewAdapter
+import com.acoders.marvelfanbook.features.comics.presentation.ui.adapter.ComicViewAdapter
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
-import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.CharacterDescriptionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -48,12 +50,13 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun setRecycleViewAdapter() {
         recyclerAdapter.apply {
-            add(CharacterDescriptionAdapter())
-            add(ComicsSliderAdapter())
+            add(ComicViewAdapter())
+            add(ComicSkeletonViewAdapter())
         }
 
         binding.apply {
-            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = recyclerAdapter
         }
     }
@@ -67,16 +70,22 @@ class SuperheroesDetailFragment : Fragment() {
 
             diff(viewLifecycleOwner, { it.superheroView }) {
                 bindToolbar(it)
+                bindDescription(it)
             }
 
-            diff(viewLifecycleOwner, { it.dataList }) {
-                recyclerAdapter.submitList(it)
+            diff(viewLifecycleOwner, { it.comics }) {
+                bindComics(it)
             }
 
             diff(viewLifecycleOwner, { it.error }) {
                 showError(it != null)
             }
         }
+    }
+
+    private fun bindComics(comics: List<DelegateAdapterItem>) {
+        binding.comicSectionTv.visible()
+        recyclerAdapter.submitList(comics)
     }
 
     private fun showLoading(show: Boolean) {
@@ -88,6 +97,12 @@ class SuperheroesDetailFragment : Fragment() {
         binding.apply {
             collapsingToolbar.title = superheroView?.name.orEmpty()
             heroIv.load(superheroView?.thumbnail?.getUri().orEmpty())
+        }
+    }
+
+    private fun bindDescription(superheroView: SuperheroView?) {
+        binding.apply {
+            descriptionTv.text = superheroView?.description.orEmpty()
         }
     }
 

@@ -14,4 +14,8 @@
     <attr name="skeletonBaseColor" format="reference" />
     <attr name="skeletonHighlightColor" format="reference" />
     <attr name="fontFamilyBold" format="reference" />
+
+    <declare-styleable name="AspectRatioImageView">
+        <attr name="ratio" format="float" />
+    </declare-styleable>
 </resources>

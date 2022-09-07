@@ -25,6 +25,10 @@
     </style>
 
     <!-- Super Hero Detail -->
+    <style name="SuperheroDetailContainer">
+        <item name="android:background">?colorPrimary</item>
+    </style>
+
     <style name="SuperheroCollapsingToolbarLayoutStyle">
         <item name="collapsedTitleTextAppearance">@style/TextAppearance.App.CollapsingToolbar.Collapsed</item>
         <item name="contentScrim">?attr/colorPrimary</item>
@@ -39,7 +43,6 @@
     </style>
 
     <style name="SuperheroRecycleViewStyle">
-        <item name="android:background">?colorPrimary</item>
         <item name="android:padding">5dp</item>
     </style>
 

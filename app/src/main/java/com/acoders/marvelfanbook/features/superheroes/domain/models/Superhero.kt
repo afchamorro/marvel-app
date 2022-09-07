@@ -12,7 +12,7 @@ data class Superhero(
     val thumbnail: Thumbnail = Thumbnail.empty
 ) {
 
-    fun toPresentationModel() = SuperheroView(id, name, thumbnail.toPresentationModel())
+    fun toPresentationModel() = SuperheroView(id, name, description, thumbnail.toPresentationModel())
 
     fun toDescriptionView() = DescriptionView(description)
 

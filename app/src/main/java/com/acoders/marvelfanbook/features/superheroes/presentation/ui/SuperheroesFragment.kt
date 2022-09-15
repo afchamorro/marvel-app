@@ -5,10 +5,12 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.acoders.marvelfanbook.R
 import com.acoders.marvelfanbook.core.extensions.diff
 import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.htmlSpan
@@ -87,6 +89,9 @@ class SuperheroesFragment : Fragment() {
             diff(viewLifecycleOwner, { it.error }) {
                 showError(it != null)
             }
+            diff(viewLifecycleOwner, { it.networkAvailable}){ available ->
+                if(available) hideNetworkBanner() else showNetworkBanner()
+            }
         }
     }
 
@@ -108,6 +113,27 @@ class SuperheroesFragment : Fragment() {
     private fun showError(show: Boolean) {
         if (show) binding.errorTv.visible() else binding.errorTv.gone()
     }
+
+    private fun showNetworkBanner() {
+        binding.bannerLayout.rootBanner.startAnimation(
+            AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.slide_bottom_down
+            )
+        )
+        binding.bannerLayout.rootBanner.visible()
+    }
+
+    private fun hideNetworkBanner() {
+        binding.bannerLayout.rootBanner.startAnimation(
+            AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.slide_bottom_up
+            )
+        )
+        binding.bannerLayout.rootBanner.gone()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -13,13 +13,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
-class NetworkConnectivityManager  @Inject constructor(@ApplicationContext context: Context) {
+class NetworkConnectivityManager @Inject constructor(@ApplicationContext context: Context) {
 
-    private val connectivityManager: ConnectivityManager
-
-    init {
-        connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    }
+    private val connectivityManager: ConnectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     val hasConnection: Flow<Boolean> = callbackFlow {
 

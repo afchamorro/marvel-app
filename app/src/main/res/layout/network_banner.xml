@@ -19,6 +19,7 @@
 
     <TextView
         android:id="@+id/tvNoConnectionMessage"
+        style="@style/TextAppearance.Theme.Marvel.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextRegular"

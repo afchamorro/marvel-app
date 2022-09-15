@@ -1,28 +1,26 @@
-package com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters
+package com.acoders.marvelfanbook.features.comics.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapter
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
-import com.acoders.marvelfanbook.databinding.DescriptionViewBinding
-import com.acoders.marvelfanbook.features.superheroes.presentation.model.DescriptionView
+import com.acoders.marvelfanbook.databinding.ComicCardSkeletonBinding
+import com.acoders.marvelfanbook.features.comics.presentation.model.ComicSkeletonView
 
-class CharacterDescriptionAdapter :
-    DelegateAdapter<DescriptionView, CharacterDescriptionAdapter.ViewHolder>(
-        DescriptionView::class.java
-    ) {
+class ComicSkeletonViewAdapter :
+    DelegateAdapter<ComicSkeletonView, ComicSkeletonViewAdapter.ViewHolder>(ComicSkeletonView::class.java) {
 
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
         ViewHolder(
-            DescriptionViewBinding.inflate(
+            ComicCardSkeletonBinding.inflate(
                 LayoutInflater
                     .from(parent.context), parent, false
             )
         )
 
     override fun bindViewHolder(
-        model: DescriptionView,
+        model: ComicSkeletonView,
         viewHolder: ViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
@@ -30,12 +28,11 @@ class CharacterDescriptionAdapter :
     }
 
     inner class ViewHolder(
-        private val binding: DescriptionViewBinding
+        private val binding: ComicCardSkeletonBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: DescriptionView) {
+        fun bind(item: ComicSkeletonView) {
             binding.apply {
-                descriptionTv.text = item.description
+                shimmerLayout.startShimmer()
             }
         }
     }

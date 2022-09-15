@@ -14,12 +14,11 @@ import com.acoders.marvelfanbook.core.extensions.gone
 import com.acoders.marvelfanbook.core.extensions.htmlSpan
 import com.acoders.marvelfanbook.core.extensions.visible
 import com.acoders.marvelfanbook.core.platform.delegateadapter.RecycleViewDelegateAdapter
-import com.acoders.marvelfanbook.databinding.SuperheroesFragmentBinding
+import com.acoders.marvelfanbook.databinding.FragmentSuperherosBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.SuperHeroViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class SuperheroesFragment : Fragment() {
@@ -29,7 +28,7 @@ class SuperheroesFragment : Fragment() {
 
     private val viewModel: SuperheroesViewModel by viewModels()
 
-    private var _binding: SuperheroesFragmentBinding? = null
+    private var _binding: FragmentSuperherosBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var superHeroesState: SuperHeroesState
@@ -40,10 +39,11 @@ class SuperheroesFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SuperheroesFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentSuperherosBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -98,7 +98,7 @@ class SuperheroesFragment : Fragment() {
             View.GONE
     }
 
-    private fun bindAttributionLink(link: String){
+    private fun bindAttributionLink(link: String) {
         binding.attributionTv.apply {
             text = link.htmlSpan()
             movementMethod = LinkMovementMethod()

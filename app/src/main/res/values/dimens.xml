@@ -16,4 +16,6 @@
     <dimen name="superhero_card_corners_radius">6dp</dimen>
     <dimen name="attribution_message_height">30dp</dimen>
     <dimen name="imageShadowHeight">100dp</dimen>
+    <dimen name="comic_height">200dp</dimen>
+    <dimen name="comic_width">133dp</dimen>
 </resources>

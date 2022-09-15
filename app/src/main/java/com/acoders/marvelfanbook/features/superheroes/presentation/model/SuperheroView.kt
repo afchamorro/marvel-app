@@ -4,10 +4,10 @@ import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterIt
 import com.acoders.marvelfanbook.features.common.presentation.model.ThumbnailView
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 
-
 data class SuperheroView(
     val id: Long = 0,
     val name: String = "",
+    val description: String = "",
     val thumbnail: ThumbnailView = ThumbnailView.empty
 ) : DelegateAdapterItem {
 
@@ -25,9 +25,9 @@ data class SuperheroView(
     ) {
 
         override fun equals(other: Any?): Boolean {
-            return other is SuperheroViewContent
-                    && other.name == this.name
-                    && other.thumbnail == this.thumbnail
+            return other is SuperheroViewContent &&
+                other.name == this.name &&
+                other.thumbnail == this.thumbnail
         }
 
         override fun hashCode(): Int {
@@ -37,5 +37,3 @@ data class SuperheroView(
 
     fun toDomainModel(): Superhero = Superhero(id, name, thumbnail = thumbnail.toDomainModel())
 }
-
-

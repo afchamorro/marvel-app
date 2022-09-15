@@ -2,14 +2,14 @@ package com.acoders.marvelfanbook.features.superheroes.data.repository
 
 import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.extensions.tryCall
+import com.acoders.marvelfanbook.features.common.framework.remote.Paginated
+import com.acoders.marvelfanbook.features.common.framework.remote.PaginatedWrapper
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.AttributionInfoLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesRemoteDataSource
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 import com.acoders.marvelfanbook.features.superheroes.domain.repository.SuperheroesRepository
 import com.acoders.marvelfanbook.features.superheroes.framework.remote.SuperheroDto
-import com.acoders.marvelfanbook.framework.remote.schemes.common.Paginated
-import com.acoders.marvelfanbook.framework.remote.schemes.common.PaginatedWrapper
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

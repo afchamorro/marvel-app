@@ -25,6 +25,10 @@
     </style>
 
     <!-- Super Hero Detail -->
+    <style name="SuperheroDetailContainer">
+        <item name="android:background">?colorPrimary</item>
+    </style>
+
     <style name="SuperheroCollapsingToolbarLayoutStyle">
         <item name="collapsedTitleTextAppearance">@style/TextAppearance.App.CollapsingToolbar.Collapsed</item>
         <item name="contentScrim">?attr/colorPrimary</item>
@@ -39,15 +43,47 @@
     </style>
 
     <style name="SuperheroRecycleViewStyle">
-        <item name="android:background">?colorPrimary</item>
         <item name="android:padding">5dp</item>
     </style>
 
     <style name="SuperheroDescriptionStyle">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Body1</item>
+        <item name="android:lineSpacingExtra">4dp</item>
         <item name="android:textColor">?bodyTextColor</item>
         <item name="android:padding">?spaceRegular</item>
     </style>
 
+    <!-- Comics -->
+    <style name="ComicSectionTitleStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Headline6</item>
+        <item name="android:textColor">?bodyTextColor</item>
+        <item name="android:padding">?spaceRegular</item>
+    </style>
+
+    <style name="ComicCardViewStyle">
+        <item name="cardBackgroundColor">?cardBackgroundColor</item>
+        <item name="cardCornerRadius">@dimen/superhero_card_corners_radius</item>
+        <item name="android:layout_margin">@dimen/superhero_card_margin</item>
+    </style>
+
+    <style name="ComicTitleStyle">
+        <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Subtitle1</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:minLines">2</item>
+        <item name="android:padding">?spaceHalf</item>
+        <item name="android:background">@drawable/title_gradient_black_bg</item>
+    </style>
+
+    <style name="SkeletonStyle">
+        <item name="shimmer_auto_start">false</item>
+        <item name="shimmer_base_alpha">100</item>
+        <item name="shimmer_base_color">?skeletonBaseColor</item>
+        <item name="shimmer_colored">true</item>
+        <item name="shimmer_highlight_color">?skeletonHighlightColor</item>
+        <item name="shimmer_repeat_mode">restart</item>
+        <item name="shimmer_tilt">10</item>
+    </style>
 
 </resources>

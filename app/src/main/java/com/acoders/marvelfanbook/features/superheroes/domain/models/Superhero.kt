@@ -2,7 +2,6 @@ package com.acoders.marvelfanbook.features.superheroes.domain.models
 
 import com.acoders.marvelfanbook.features.common.domain.models.Thumbnail
 import com.acoders.marvelfanbook.features.superheroes.framework.database.SuperHeroEntity
-import com.acoders.marvelfanbook.features.superheroes.presentation.model.DescriptionView
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 
 data class Superhero(
@@ -12,9 +11,7 @@ data class Superhero(
     val thumbnail: Thumbnail = Thumbnail.empty
 ) {
 
-    fun toPresentationModel() = SuperheroView(id, name, thumbnail.toPresentationModel())
-
-    fun toDescriptionView() = DescriptionView(description)
+    fun toPresentationModel() = SuperheroView(id, name, description, thumbnail.toPresentationModel())
 
     fun toEntityModel() = SuperHeroEntity(id, name, description, thumbnail.path, thumbnail.extension)
 }

@@ -3,9 +3,11 @@
 
     <color name="transparent">#00000000</color>
 
-    <color name="primary_200">#C72523</color>
-    <color name="primary_500">#C72523</color>
+    <color name="primary_500">#F44130</color>
+    <color name="primary_600">#E63630</color>
     <color name="primary_700">#C72523</color>
+    <color name="primary_800">#C72323</color>
+    <color name="primary_900">#B81616</color>
     <color name="teal_200">#B9BEBA</color>
     <color name="teal_700">#B9BEBA</color>
     <color name="black">#FF000000</color>

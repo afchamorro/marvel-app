@@ -1,8 +1,8 @@
 package com.acoders.marvelfanbook.features.superheroes.framework.remote
 
+import com.acoders.marvelfanbook.features.common.framework.remote.PaginatedWrapper
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesRemoteDataSource
 import com.acoders.marvelfanbook.framework.remote.api.MarvelEndpoints
-import com.acoders.marvelfanbook.framework.remote.schemes.common.PaginatedWrapper
 import javax.inject.Inject
 
 class SuperHeroesRemoteDataSourceImpl @Inject constructor(private val endpoints: MarvelEndpoints) :

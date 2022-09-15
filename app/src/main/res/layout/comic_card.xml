@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card"
-    style="@style/SuperheroCardViewStyle"
-    android:layout_width="match_parent"
+    style="@style/ComicCardViewStyle"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="@dimen/comic_width"
+        android:layout_height="@dimen/comic_height">
 
         <ImageView
-            android:id="@+id/heroe_picture_iv"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:id="@+id/comicIv"
+            android:layout_width="@dimen/comic_width"
+            android:layout_height="@dimen/comic_height"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -21,11 +20,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/comicTitleTv"
             style="@style/SuperheroNameStyle"
-            android:id="@+id/heroe_name_tv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

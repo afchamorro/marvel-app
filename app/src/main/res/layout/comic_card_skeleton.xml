@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ComicCardViewStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        style="@style/SkeletonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="@dimen/comic_width"
+            android:layout_height="@dimen/comic_height"
+            android:background="?colorPrimaryVariant" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+</androidx.cardview.widget.CardView>

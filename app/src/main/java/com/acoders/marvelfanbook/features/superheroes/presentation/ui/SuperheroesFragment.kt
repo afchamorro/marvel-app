@@ -38,7 +38,7 @@ class SuperheroesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        superHeroesState = SuperHeroesState(findNavController())
+        superHeroesState = SuperHeroesState(findNavController(), resources)
     }
 
     override fun onCreateView(
@@ -46,6 +46,7 @@ class SuperheroesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentSuperherosBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,13 +63,22 @@ class SuperheroesFragment : Fragment() {
 
     private fun setRecyclerViewAdapter() {
         binding.apply {
-            recyclerview.layoutManager =
-                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-
-            adapter.add(
-                SuperHeroViewAdapter { superHeroesState.onSuperHeroClicked(it.toDomainModel()) }
-            )
+            recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            adapter.add(SuperHeroViewAdapter { titleView, imageView, hero ->
+                superHeroesState.onSuperHeroClicked(
+                    titleView,
+                    imageView,
+                    hero.toDomainModel()
+                )
+            })
             recyclerview.adapter = adapter
+        }
+        binding.recyclerview.apply {
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
         }
     }
 
@@ -80,7 +90,7 @@ class SuperheroesFragment : Fragment() {
             }
 
             diff(viewLifecycleOwner, { it.dataList }) {
-                Log.d("TEST","Collecting hero list")
+                Log.d("TEST", "Collecting hero list")
                 bindSuperHeroesList(it)
             }
 
@@ -91,8 +101,8 @@ class SuperheroesFragment : Fragment() {
             diff(viewLifecycleOwner, { it.error }) {
                 showError(it != null)
             }
-            diff(viewLifecycleOwner, { it.networkAvailable}){ available ->
-                if(available) hideNetworkBanner() else showNetworkBanner()
+            diff(viewLifecycleOwner, { it.networkAvailable }) { available ->
+                if (available) hideNetworkBanner() else showNetworkBanner()
             }
         }
     }

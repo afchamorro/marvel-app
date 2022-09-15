@@ -23,7 +23,7 @@ class SuperheroesDetailViewModel @Inject constructor(
     private val getSuperheroComicsUseCase: GetSuperheroComicsUseCase
 ) : ViewModel() {
 
-    private val heroId: Long =
+    val heroId: Long =
         SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
 
     private val _uiState = MutableStateFlow(UiState())

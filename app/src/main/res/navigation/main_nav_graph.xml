@@ -13,11 +13,6 @@
         <action
             android:id="@+id/action_heroes_to_detail"
             app:destination="@id/superheroesDetail"
-            app:enterAnim="@anim/enter_scale_animation"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:launchSingleTop="false"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/superheroesFragment" />
     </fragment>
 

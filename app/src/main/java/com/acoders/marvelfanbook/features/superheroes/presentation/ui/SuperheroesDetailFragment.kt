@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acoders.marvelfanbook.core.extensions.diff
 import com.acoders.marvelfanbook.core.extensions.load
@@ -41,11 +42,21 @@ class SuperheroesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupNavigationUp()
         setRecycleViewAdapter()
         updateUI()
         viewModel.apply {
             loadSuperheroDetail()
         }
+    }
+
+    private fun setupNavigationUp() {
+        binding.heroToolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setRecycleViewAdapter() {
@@ -108,10 +119,5 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun showError(show: Boolean) {
         // TODO SNACKA BAR if (show) binding.errorTv.visible() else binding.errorTv.gone()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

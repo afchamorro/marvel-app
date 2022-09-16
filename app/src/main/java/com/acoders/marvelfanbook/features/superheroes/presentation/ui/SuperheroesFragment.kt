@@ -38,7 +38,7 @@ class SuperheroesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        superHeroesState = SuperHeroesState(findNavController(), resources)
+        superHeroesState = SuperHeroesState(findNavController())
     }
 
     override fun onCreateView(
@@ -64,10 +64,11 @@ class SuperheroesFragment : Fragment() {
     private fun setRecyclerViewAdapter() {
         binding.apply {
             recyclerview.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-            adapter.add(SuperHeroViewAdapter { titleView, imageView, hero ->
+            adapter.add(SuperHeroViewAdapter { titleView, imageView,shadow, hero ->
                 superHeroesState.onSuperHeroClicked(
                     titleView,
                     imageView,
+                    shadow,
                     hero.toDomainModel()
                 )
             })

@@ -20,6 +20,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/ivShadow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/title_gradient_black_bg"
+            app:layout_constraintTop_toTopOf="@id/heroe_name_tv"
+            app:layout_constraintBottom_toBottomOf="@id/heroe_name_tv"/>
+
         <TextView
             style="@style/SuperheroNameStyle"
             android:id="@+id/heroe_name_tv"

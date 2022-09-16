@@ -52,7 +52,7 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_mv_logo</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:navigationBarColor">@color/primary_500</item>
-        <item name="postSplashScreenTheme">@style/Theme.MarvelFanBook</item>
+        <item name="postSplashScreenTheme">@style/Theme.MarvelFanBook.NoActionBar</item>
     </style>
 
 </resources>

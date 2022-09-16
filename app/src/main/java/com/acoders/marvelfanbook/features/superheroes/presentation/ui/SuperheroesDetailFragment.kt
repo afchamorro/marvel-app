@@ -64,11 +64,14 @@ class SuperheroesDetailFragment : Fragment() {
     private fun setHeroTransitionName() {
         ViewCompat.setTransitionName(binding.heroIv, "hero_image_${viewModel.heroId}")
         ViewCompat.setTransitionName(binding.tvHeroName, "hero_title_${viewModel.heroId}")
+        ViewCompat.setTransitionName(binding.ivShadow, "hero_shadow_${viewModel.heroId}")
     }
 
     private fun bindSharedElementsTransition() {
-        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
-        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
     }
 
     private fun setupNavigationUp() {
@@ -127,19 +130,21 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun bindToolbar(superheroView: SuperheroView?) {
         binding.apply {
-            collapsingToolbar.title = superheroView?.name.orEmpty()
+//            collapsingToolbar.title = superheroView?.name.orEmpty() // TODO problemas con la animación de transición
             heroIv.load(superheroView?.thumbnail?.getUri().orEmpty())
             tvHeroName.text = superheroView?.name.orEmpty()
             appbarLayout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
                 override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
                     when (state) {
                         State.COLLAPSED -> {
-                            tvHeroName.invisible()
+                            collapsingToolbar.title = superheroView?.name.orEmpty()
                         }
-                        State.EXPANDED  -> {
-                            tvHeroName.visible()
+                        State.EXPANDED -> {
+                            collapsingToolbar.title = ""
                         }
-                        State.IDLE      -> {}
+                        State.IDLE -> {
+                            collapsingToolbar.title = ""
+                        }
                     }
                 }
             }

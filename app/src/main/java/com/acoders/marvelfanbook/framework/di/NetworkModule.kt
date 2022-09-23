@@ -1,12 +1,15 @@
 package com.acoders.marvelfanbook.data.di
 
+import android.content.Context
 import com.acoders.marvelfanbook.BuildConfig
 import com.acoders.marvelfanbook.core.extensions.md5
+import com.acoders.marvelfanbook.core.platform.NetworkConnectivityManager
 import com.acoders.marvelfanbook.framework.remote.api.MarvelEndpoints
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -86,4 +89,8 @@ object NetworkModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit) = retrofit.create(MarvelEndpoints::class.java)
 
+
+    @Provides
+    @Singleton
+    fun provideNetworkConnectivityManager(@ApplicationContext context: Context) = NetworkConnectivityManager(context)
 }

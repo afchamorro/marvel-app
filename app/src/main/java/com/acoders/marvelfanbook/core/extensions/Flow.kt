@@ -14,17 +14,23 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-fun <T, U> Flow<T>.diff(lifecycleOwner: LifecycleOwner, mapFlow: (T) -> U, body: (U) -> Unit) {
+fun <T, U> Flow<T>.diff(
+    lifecycleOwner: LifecycleOwner,
+    mapFlow: (T) -> U,
+    state: Lifecycle.State = Lifecycle.State.CREATED,
+    body: (U) -> Unit
+) {
 
     lifecycleOwner.launchAndCollect(
         flow = map(mapFlow).distinctUntilChanged(),
+        state = state,
         body = body
     )
 }
 
 fun <T> LifecycleOwner.launchAndCollect(
     flow: Flow<T>,
-    state: Lifecycle.State = Lifecycle.State.STARTED,
+    state: Lifecycle.State = Lifecycle.State.CREATED,
     body: (T) -> Unit
 ) {
     lifecycleScope.launch {

@@ -12,15 +12,12 @@
         tools:layout="@layout/fragment_superheros">
         <action
             android:id="@+id/action_heroes_to_detail"
-            app:destination="@id/superheroesDetailFragment"
-            app:enterAnim="@anim/enter_scale_animation"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/superheroesDetail"
+            app:popUpTo="@id/superheroesFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/superheroesDetailFragment"
+        android:id="@+id/superheroesDetail"
         android:name="com.acoders.marvelfanbook.features.superheroes.presentation.ui.SuperheroesDetailFragment"
         android:label="fragment_superheroes_detail"
         tools:layout="@layout/fragment_superheroes_detail">

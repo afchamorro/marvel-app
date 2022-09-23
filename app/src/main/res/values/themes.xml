@@ -15,6 +15,8 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">?attr/colorPrimary</item>
 
+        <item name="android:windowActivityTransitions">true</item>
+
         <item name="titleTextColor">@color/white</item>
         <item name="subtitleTextColor">@color/white</item>
         <item name="bodyTextColor">@color/white</item>
@@ -47,9 +49,10 @@
         <item name="colorPrimary">@color/primary_500</item>
         <item name="colorPrimaryDark">@color/primary_700</item>
         <item name="windowSplashScreenBackground">@color/splash_color</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_mv_logo</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:navigationBarColor">@color/primary_500</item>
-        <item name="postSplashScreenTheme">@style/Theme.MarvelFanBook</item>
+        <item name="postSplashScreenTheme">@style/Theme.MarvelFanBook.NoActionBar</item>
     </style>
 
 </resources>

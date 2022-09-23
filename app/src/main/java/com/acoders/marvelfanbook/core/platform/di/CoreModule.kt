@@ -12,4 +12,5 @@ object CoreModule {
 
     @Provides
     fun provideRecycleDelegateAdapter() = RecycleViewDelegateAdapter()
+
 }

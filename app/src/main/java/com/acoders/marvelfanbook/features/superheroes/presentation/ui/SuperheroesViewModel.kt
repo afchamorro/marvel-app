@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.core.exception.toFailure
+import com.acoders.marvelfanbook.core.platform.NetworkConnectivityManager
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.FetchHeroesListUseCase
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetAttributionLinkUseCase
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroesUseCase
@@ -15,9 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SuperheroesViewModel @Inject constructor(
-    getSuperheroesUseCase: GetSuperheroesUseCase,
+    private val getSuperheroesUseCase: GetSuperheroesUseCase,
     private val getAttributionLinkUseCase: GetAttributionLinkUseCase,
-    private val fetchHeroesListUseCase: FetchHeroesListUseCase
+    private val fetchHeroesListUseCase: FetchHeroesListUseCase,
+    private val networkConnectivityManager: NetworkConnectivityManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -25,6 +27,11 @@ class SuperheroesViewModel @Inject constructor(
 
 
     init {
+        collectNetworkState()
+        collectSuperHeroes()
+    }
+
+    private fun collectSuperHeroes() {
         viewModelScope.launch {
             getSuperheroesUseCase()
                 .catch { cause -> _uiState.update { it.copy(error = cause.toFailure()) } }
@@ -47,10 +54,19 @@ class SuperheroesViewModel @Inject constructor(
         }
     }
 
+    private fun collectNetworkState() {
+        viewModelScope.launch {
+            networkConnectivityManager.hasConnection.collect { hasConnection ->
+                _uiState.update { it.copy(networkAvailable = hasConnection) }
+            }
+        }
+    }
+
     data class UiState(
         val loading: Boolean = false,
         val error: Failure? = null,
         val dataList: List<SuperheroView> = arrayListOf(),
-        val attributionLink: String = ""
+        val attributionLink: String = "",
+        val networkAvailable: Boolean = true
     )
 }

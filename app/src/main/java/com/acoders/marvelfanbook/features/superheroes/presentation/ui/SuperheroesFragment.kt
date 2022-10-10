@@ -57,7 +57,6 @@ class SuperheroesFragment : Fragment() {
         updateUI()
         viewModel.apply {
             getAttributionLink()
-            fetchSuperHeroes()
         }
     }
 

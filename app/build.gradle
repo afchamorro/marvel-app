@@ -11,7 +11,7 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
-    compileSdk 31
+    compileSdk 33
     namespace 'com.acoders.marvelfanbook'
 
     defaultConfig {
@@ -49,35 +49,32 @@ android {
 dependencies {
 
     // Android KTX
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.collection:collection-ktx:1.2.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+
 
     //Lifeciclye
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc02'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-rc02'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     // Android UI and appcompat
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //Dependence injection HILT
     implementation "com.google.dagger:hilt-android:2.42"
     kapt "com.google.dagger:hilt-android-compiler:2.42"
-
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    //Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+
 
     //Network - OK HTTP
-    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     //Network - Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -86,9 +83,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 
     // Room Database
-    implementation 'androidx.room:room-runtime:2.4.2'
-    implementation 'androidx.room:room-ktx:2.4.2'
-    kapt 'androidx.room:room-compiler:2.4.2'
+    implementation 'androidx.room:room-runtime:2.4.3'
+    implementation 'androidx.room:room-ktx:2.4.3'
+    kapt 'androidx.room:room-compiler:2.4.3'
 
     //Errors
     implementation("io.arrow-kt:arrow-core:1.0.1")
@@ -101,12 +98,12 @@ dependencies {
     implementation "com.jakewharton.timber:timber:4.7.1"
 
     // Navigation
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
 
     // Splash
-    implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     //Data Store
     implementation("androidx.datastore:datastore:1.0.0")

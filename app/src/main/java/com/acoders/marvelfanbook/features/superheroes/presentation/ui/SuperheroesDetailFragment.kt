@@ -28,11 +28,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SuperheroesDetailFragment : Fragment() {
 
-    @Inject
-    lateinit var recyclerAdapter: RecycleViewDelegateAdapter
 
     private val viewModel: SuperheroesDetailViewModel by viewModels()
 
+    private var recyclerAdapter: RecycleViewDelegateAdapter = RecycleViewDelegateAdapter()
     private var _binding: FragmentSuperheroesDetailBinding? = null
     private val binding get() = _binding!!
 

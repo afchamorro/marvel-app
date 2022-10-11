@@ -21,16 +21,13 @@ import com.acoders.marvelfanbook.databinding.FragmentSuperherosBinding
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.adapters.SuperHeroViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SuperheroesFragment : Fragment() {
 
-    @Inject
-    lateinit var adapter: RecycleViewDelegateAdapter
-
     private val viewModel: SuperheroesViewModel by viewModels()
 
+    private val adapter: RecycleViewDelegateAdapter = RecycleViewDelegateAdapter()
     private var _binding: FragmentSuperherosBinding? = null
     private val binding get() = _binding!!
 

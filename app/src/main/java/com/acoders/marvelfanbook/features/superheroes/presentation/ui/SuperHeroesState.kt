@@ -1,6 +1,6 @@
 package com.acoders.marvelfanbook.features.superheroes.presentation.ui
 
-import android.content.res.Resources
+
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.FragmentNavigatorExtras

@@ -14,10 +14,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object CoreModule {
 
-    @Provides
-    fun provideRecycleDelegateAdapter() = RecycleViewDelegateAdapter()
-
-
     @Singleton
     @Provides
     fun provideAppDispatchers(): DispatcherProvider = AppDispatcherProvider()

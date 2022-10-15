@@ -18,7 +18,6 @@ import javax.inject.Inject
 class SuperheroesViewModel @Inject constructor(
     private val getSuperheroesUseCase: GetSuperheroesUseCase,
     private val getAttributionLinkUseCase: GetAttributionLinkUseCase,
-    private val fetchHeroesListUseCase: FetchHeroesListUseCase,
     private val networkConnectivityManager: NetworkConnectivityManager
 ) : ViewModel() {
 
@@ -33,17 +32,10 @@ class SuperheroesViewModel @Inject constructor(
 
     private fun collectSuperHeroes() {
         viewModelScope.launch {
-            getSuperheroesUseCase()
-                .catch { cause -> _uiState.update { it.copy(error = cause.toFailure()) } }
-                .collect { flowData -> _uiState.update { it.copy(dataList = flowData) } }
-        }
-    }
-
-    fun fetchSuperHeroes() {
-        viewModelScope.launch {
             _uiState.value = _uiState.value.copy(loading = true)
-            val failure = fetchHeroesListUseCase()
-            _uiState.value = _uiState.value.copy(loading = false, error = failure)
+            getSuperheroesUseCase()
+                .catch { cause -> _uiState.update { it.copy(loading = false,error = cause.toFailure()) } }
+                .collect { flowData -> _uiState.update { it.copy(loading = false,dataList = flowData) } }
         }
     }
 

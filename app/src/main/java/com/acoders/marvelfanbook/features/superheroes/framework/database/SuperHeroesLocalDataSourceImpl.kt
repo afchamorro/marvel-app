@@ -1,24 +1,31 @@
 package com.acoders.marvelfanbook.features.superheroes.framework.database
 
+import com.acoders.marvelfanbook.core.platform.DispatcherProvider
 import com.acoders.marvelfanbook.features.superheroes.data.datasource.SuperHeroesLocalDataSource
 import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class SuperHeroesLocalDataSourceImpl @Inject constructor(private val superHeroDao: SuperHeroDao) :
+class SuperHeroesLocalDataSourceImpl @Inject constructor(
+    private val superHeroDao: SuperHeroDao,
+    private val dispatcherProvider: DispatcherProvider
+) :
     SuperHeroesLocalDataSource {
 
     override fun getSuperHeroesList(): Flow<List<Superhero>> =
-        superHeroDao.getSuperHeroesList().map { it.toDomainModel() }
+        superHeroDao.getSuperHeroesList().flowOn(dispatcherProvider.io).map { it.toDomainModel() }.flowOn(dispatcherProvider.default)
 
     override fun getSuperHeroesById(id: Long): Flow<Superhero> =
-        superHeroDao.getSuperHeroesById(id).map { it.toDomainModel() }
+        superHeroDao.getSuperHeroesById(id).flowOn(dispatcherProvider.io).map { it.toDomainModel() }.flowOn(dispatcherProvider.default)
 
-    override suspend fun save(heroesList: List<Superhero>) =
+    override suspend fun save(heroesList: List<Superhero>) = withContext(dispatcherProvider.io) {
         superHeroDao.saveSuperHeroes(heroesList.toEntityModel())
+    }
 
-    override suspend fun isEmpty(): Boolean = superHeroDao.numHeroes() == 0
+    override suspend fun isEmpty(): Boolean = withContext(dispatcherProvider.io) { superHeroDao.numHeroes() == 0 }
 }
 
 fun List<SuperHeroEntity>.toDomainModel(): List<Superhero> = map { it.toDomainModel() }

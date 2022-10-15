@@ -34,6 +34,8 @@
         <item name="skeletonBaseColor">@color/primary_900</item>
         <item name="skeletonHighlightColor">@color/primary_800</item>
 
+        <item name="coverBackgroundColor">@color/black</item>
+
         <!-- Text -->
         <item name="android:fontFamily">@font/marvel_family</item>
         <item name="fontFamilyBold">@font/american_captain_bold</item>

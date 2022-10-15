@@ -18,4 +18,5 @@
     <dimen name="imageShadowHeight">100dp</dimen>
     <dimen name="comic_height">200dp</dimen>
     <dimen name="comic_width">133dp</dimen>
+    <dimen name="superhero_cover_min_height">350dp</dimen>
 </resources>

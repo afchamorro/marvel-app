@@ -9,50 +9,60 @@
     android:theme="@style/Theme.MarvelFanBook.NoActionBar">
 
     <com.google.android.material.appbar.AppBarLayout
+        style="@style/SuperheroAppBarStyle"
         android:id="@+id/appbarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:minHeight="@dimen/superhero_cover_min_height">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             style="@style/SuperheroCollapsingToolbarLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="350dp">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:minHeight="@dimen/superhero_cover_min_height">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true">
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax">
 
                 <ImageView
                     android:id="@+id/heroIv"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
-                    android:scaleType="centerCrop"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:fitsSystemWindows="true"
+                    android:minHeight="@dimen/superhero_cover_min_height"
+                    android:scaleType="fitXY"
+                    app:layout_collapseMode="parallax"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/ivShadow"
                     style="@style/SuperheroToolbarShadowStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/imageShadowHeight"
-                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="@dimen/imageShadowHeight"
                     android:src="@drawable/title_gradient_black_bg"
                     app:layout_collapseMode="parallax" />
 
                 <TextView
-                    style="@style/TextAppearance.App.CollapsingToolbar.Expanded"
                     android:id="@+id/tvHeroName"
+                    style="@style/TextAppearance.App.CollapsingToolbar.Expanded"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="?spaceBig"
+                    android:layout_marginBottom="?spaceHalf"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    tools:text="TEST" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -61,8 +71,6 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_arrow_back" />
-
-
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

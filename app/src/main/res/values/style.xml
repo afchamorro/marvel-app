@@ -19,7 +19,7 @@
 
     <style name="AttributionLinkStyle">
         <item name="android:textAppearance">@style/TextAppearance.Theme.Marvel.Caption</item>
-        <item name="android:background">?colorPrimaryVariant</item>
+        <item name="android:background">?colorPrimary</item>
         <item name="android:gravity">center</item>
     </style>
 

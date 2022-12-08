@@ -51,27 +51,25 @@ dependencies {
     // Android KTX
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.collection:collection-ktx:1.2.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.3'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
 
 
     //Lifeciclye
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha02'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha03'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha03'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     // Android UI and appcompat
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //Dependence injection HILT
-    implementation "com.google.dagger:hilt-android:2.42"
-    kapt "com.google.dagger:hilt-android-compiler:2.42"
+    implementation "com.google.dagger:hilt-android:2.43.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.43.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
-
 
     //Network - OK HTTP
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
@@ -98,9 +96,9 @@ dependencies {
     implementation "com.jakewharton.timber:timber:4.7.1"
 
     // Navigation
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     // Splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
@@ -114,6 +112,16 @@ dependencies {
 
     //TESTING
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    //Mockito
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+    testImplementation "org.mockito:mockito-inline:4.4.0"
+
+    //Coroutines
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+
+    //Turbine (for stat flows)
+    testImplementation 'app.cash.turbine:turbine:0.8.0'
 }

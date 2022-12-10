@@ -76,7 +76,6 @@ class SuperHeroesRepositoryTest {
                 times(1)
             ).saveAttributionLink(result.attributionHTML)
             assertEquals(null, superheroes)
-
         }
 
     @Test

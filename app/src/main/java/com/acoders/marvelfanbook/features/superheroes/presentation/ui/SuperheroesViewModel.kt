@@ -16,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SuperheroesViewModel @Inject constructor(
+    private val fetchHeroesListUseCase: FetchHeroesListUseCase,
     private val getSuperheroesUseCase: GetSuperheroesUseCase,
     private val getAttributionLinkUseCase: GetAttributionLinkUseCase,
     private val networkConnectivityManager: NetworkConnectivityManager
@@ -28,6 +29,13 @@ class SuperheroesViewModel @Inject constructor(
     init {
         collectNetworkState()
         collectSuperHeroes()
+        fetchSuperheroes()
+    }
+
+    private fun fetchSuperheroes(){
+        viewModelScope.launch {
+            fetchHeroesListUseCase()
+        }
     }
 
     private fun collectSuperHeroes() {

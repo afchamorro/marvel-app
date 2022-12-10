@@ -15,17 +15,19 @@ class SuperHeroesLocalDataSourceImpl @Inject constructor(
 ) :
     SuperHeroesLocalDataSource {
 
-    override fun getSuperHeroesList(): Flow<List<Superhero>> =
-        superHeroDao.getSuperHeroesList().flowOn(dispatcherProvider.io).map { it.toDomainModel() }.flowOn(dispatcherProvider.default)
+    override val superheroes: Flow<List<Superhero>> =
+        superHeroDao.getSuperHeroesList().map { it.toDomainModel() }
 
     override fun getSuperHeroesById(id: Long): Flow<Superhero> =
-        superHeroDao.getSuperHeroesById(id).flowOn(dispatcherProvider.io).map { it.toDomainModel() }.flowOn(dispatcherProvider.default)
+        superHeroDao.getSuperHeroesById(id).flowOn(dispatcherProvider.io).map { it.toDomainModel() }
+            .flowOn(dispatcherProvider.default)
 
     override suspend fun save(heroesList: List<Superhero>) = withContext(dispatcherProvider.io) {
         superHeroDao.saveSuperHeroes(heroesList.toEntityModel())
     }
 
-    override suspend fun isEmpty(): Boolean = withContext(dispatcherProvider.io) { superHeroDao.numHeroes() == 0 }
+    override suspend fun isEmpty(): Boolean =
+        withContext(dispatcherProvider.io) { superHeroDao.numHeroes() == 0 }
 }
 
 fun List<SuperHeroEntity>.toDomainModel(): List<Superhero> = map { it.toDomainModel() }

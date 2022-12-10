@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SuperHeroesLocalDataSource {
 
-    fun getSuperHeroesList(): Flow<List<Superhero>>
+    val superheroes: Flow<List<Superhero>>
 
     fun getSuperHeroesById(id: Long): Flow<Superhero>
 

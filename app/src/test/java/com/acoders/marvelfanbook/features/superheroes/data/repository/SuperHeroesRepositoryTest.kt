@@ -39,6 +39,8 @@ class SuperHeroesRepositoryTest {
 
     private val localSuperheroes = flowOf(listOf(sampleSuperHero.copy(id = 1)))
 
+    private val localAttributionLink = flowOf("attribution link")
+
     @Before
     fun setUp() {
         whenever(localDataSource.superheroes).thenReturn(localSuperheroes)
@@ -87,5 +89,15 @@ class SuperHeroesRepositoryTest {
         val result = repository.superHero(SUPERHERO_TEST_ID)
 
         assertEquals(superhero, result)
+    }
+
+    @Test
+    fun `Get attribution link is done in local data source`(): Unit = runBlocking {
+
+        whenever(attributionInfoLocalDataSource.getAttributionLink()).thenReturn(localAttributionLink)
+
+        val result = repository.getAttributionLink()
+
+        assertEquals(localAttributionLink, result)
     }
 }

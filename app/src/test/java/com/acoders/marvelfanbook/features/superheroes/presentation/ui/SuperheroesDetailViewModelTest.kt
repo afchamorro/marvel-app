@@ -2,8 +2,11 @@ package com.acoders.marvelfanbook.features.superheroes.presentation.ui
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import arrow.core.left
 import arrow.core.right
+import com.acoders.marvelfanbook.core.exception.Failure
 import com.acoders.marvelfanbook.features.comics.domain.usecase.GetSuperheroComicsUseCase
+import com.acoders.marvelfanbook.features.comics.presentation.model.ComicSkeletonView
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.GetSuperheroDetailsUseCase
 import com.acoders.marvelfanbook.features.superheroes.presentation.ui.SuperheroesDetailViewModel.*
 import com.acoders.marvelfanbook.features.superheroes.sampleComicsView
@@ -11,15 +14,16 @@ import com.acoders.marvelfanbook.features.superheroes.sampleSuperHeroView
 import com.acoders.marvelfanbook.testrules.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
@@ -43,22 +47,94 @@ class SuperheroesDetailViewModelTest {
     private val superhero = sampleSuperHeroView.copy(id = 1)
     private val comics = listOf(sampleComicsView.copy(id = 1), sampleComicsView.copy(id = 2))
 
-    @Before
-    fun setup() = runTest {
-        whenever(getSuperheroDetailsUseCase(any())).thenReturn(flowOf(superhero))
+
+    @Test
+    fun `Comics are requested when UI screen starts`() = runTest {
+
+        //GIVEN
         whenever(getSuperheroComicsUseCase(any())).thenReturn(comics.right())
         vm = SuperheroesDetailViewModel(
             savedStateHandle,
             getSuperheroDetailsUseCase,
             getSuperheroComicsUseCase
         )
+
+        //WHEN
+        runCurrent()
+
+        //THEM
+        verify(getSuperheroComicsUseCase).invoke(any())
     }
 
+
     @Test
-    fun `State is updated with current cached content immediately`() = runTest {
-        vm.uiState.test {
-            assertEquals(UiState(comics = comics), awaitItem())
-            cancel()
+    fun `Comics skeleton is shown when screen starts and hidden when it finishes requesting comics`() =
+        runTest {
+
+            //GIVEN
+            whenever(getSuperheroComicsUseCase(any())).thenReturn(comics.right())
+            vm = SuperheroesDetailViewModel(
+                savedStateHandle,
+                getSuperheroDetailsUseCase,
+                getSuperheroComicsUseCase
+            )
+
+            //WHEN
+
+            //THEM
+            vm.uiState.test {
+                assertEquals(UiState(comics = ComicSkeletonView.emptySkeleton), awaitItem())
+                assertEquals(UiState(comics = comics), awaitItem())
+                cancel()
+            }
         }
-    }
+
+
+    @Test
+    fun `State is updated with error when comics are requested an error occurs`() =
+        runTest {
+
+            //GIVEN
+            val error = Failure.Server(500)
+            whenever(getSuperheroComicsUseCase(any())).thenReturn(error.left())
+            vm = SuperheroesDetailViewModel(
+                savedStateHandle,
+                getSuperheroDetailsUseCase,
+                getSuperheroComicsUseCase
+            )
+
+            //WHEN
+
+            //THEM
+            vm.uiState.test {
+                assertEquals(UiState(), awaitItem())
+                assertEquals(UiState(error = error), awaitItem())
+                cancel()
+            }
+        }
+
+
+    @Test
+    fun `State is updated with superheroes and progress indicator when is requested`() =
+        runTest {
+
+            //GIVEN
+            whenever(getSuperheroDetailsUseCase(any())).thenReturn(flowOf(superhero))
+            vm = SuperheroesDetailViewModel(
+                savedStateHandle,
+                getSuperheroDetailsUseCase,
+                getSuperheroComicsUseCase
+            )
+
+            //WHEN
+            vm.loadSuperheroDetail()
+
+            //THEM
+            vm.uiState.test {
+                assertEquals(UiState(superheroView = null, loading = true), awaitItem())
+                assertEquals(UiState(superheroView = superhero, loading = false), awaitItem())
+                cancel()
+            }
+        }
+
 }

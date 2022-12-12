@@ -29,18 +29,25 @@ class SuperheroesDetailViewModel @Inject constructor(
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     init {
+        loadSuperheroComics()
+    }
+
+    private fun loadSuperheroComics() {
         viewModelScope.launch {
-            getSuperheroComicsUseCase(heroId).fold({
-                handleFailure(it)
-            }, { comics ->
-                _uiState.update {
-                    it.copy(comics = comics)
+            getSuperheroComicsUseCase(heroId).fold(
+                {
+                    handleFailure(it)
+                }, { comics ->
+                    _uiState.update { it.copy(comics = comics) }
                 }
-            })
+            )
         }
     }
 
     fun loadSuperheroDetail() {
+
+        _uiState.update { it.copy(loading = true) }
+
         viewModelScope.launch {
             getSuperheroDetailsUseCase(heroId).catch {
                 handleFailure(it.toFailure())
@@ -53,7 +60,7 @@ class SuperheroesDetailViewModel @Inject constructor(
     private fun handleSuperHeroSuccess(superhero: SuperheroView) {
         _uiState.update {
             it.copy(
-                superheroView = superhero
+                superheroView = superhero, loading = false
             )
         }
     }

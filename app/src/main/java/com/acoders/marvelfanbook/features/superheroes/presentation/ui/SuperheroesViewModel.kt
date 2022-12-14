@@ -25,33 +25,10 @@ class SuperheroesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-
     init {
         collectNetworkState()
         collectSuperHeroes()
         fetchSuperheroes()
-    }
-
-    private fun fetchSuperheroes(){
-        viewModelScope.launch {
-            fetchHeroesListUseCase()
-        }
-    }
-
-    private fun collectSuperHeroes() {
-        viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(loading = true)
-            getSuperheroesUseCase()
-                .catch { cause -> _uiState.update { it.copy(loading = false,error = cause.toFailure()) } }
-                .collect { flowData -> _uiState.update { it.copy(loading = false,dataList = flowData) } }
-        }
-    }
-
-    fun getAttributionLink() {
-        viewModelScope.launch {
-            getAttributionLinkUseCase().catch { cause -> _uiState.update { it.copy(error = cause.toFailure()) } }
-                .collect { link -> _uiState.update { it.copy(attributionLink = link) } }
-        }
     }
 
     private fun collectNetworkState() {
@@ -59,6 +36,42 @@ class SuperheroesViewModel @Inject constructor(
             networkConnectivityManager.hasConnection.collect { hasConnection ->
                 _uiState.update { it.copy(networkAvailable = hasConnection) }
             }
+        }
+    }
+
+    private fun collectSuperHeroes() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(loading = true)
+            getSuperheroesUseCase()
+                .catch { cause ->
+                    _uiState.update {
+                        it.copy(
+                            loading = false,
+                            error = cause.toFailure()
+                        )
+                    }
+                }
+                .collect { flowData ->
+                    _uiState.update {
+                        it.copy(
+                            loading = false,
+                            dataList = flowData
+                        )
+                    }
+                }
+        }
+    }
+
+    private fun fetchSuperheroes() {
+        viewModelScope.launch {
+            fetchHeroesListUseCase()
+        }
+    }
+
+    fun getAttributionLink() {
+        viewModelScope.launch {
+            getAttributionLinkUseCase().catch { cause -> _uiState.update { it.copy(error = cause.toFailure()) } }
+                .collect { link -> _uiState.update { it.copy(attributionLink = link) } }
         }
     }
 

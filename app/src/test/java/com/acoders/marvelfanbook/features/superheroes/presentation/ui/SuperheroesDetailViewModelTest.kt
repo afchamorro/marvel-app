@@ -47,7 +47,6 @@ class SuperheroesDetailViewModelTest {
     private val superhero = sampleSuperHeroView.copy(id = 1)
     private val comics = listOf(sampleComicsView.copy(id = 1), sampleComicsView.copy(id = 2))
 
-
     @Test
     fun `Comics are requested when UI screen starts`() = runTest {
 
@@ -62,10 +61,9 @@ class SuperheroesDetailViewModelTest {
         //WHEN
         runCurrent()
 
-        //THEM
+        //THEN
         verify(getSuperheroComicsUseCase).invoke(any())
     }
-
 
     @Test
     fun `Comics skeleton is shown when screen starts and hidden when it finishes requesting comics`() =
@@ -81,14 +79,13 @@ class SuperheroesDetailViewModelTest {
 
             //WHEN
 
-            //THEM
+            //THEN
             vm.uiState.test {
                 assertEquals(UiState(comics = ComicSkeletonView.emptySkeleton), awaitItem())
                 assertEquals(UiState(comics = comics), awaitItem())
                 cancel()
             }
         }
-
 
     @Test
     fun `State is updated with error when comics are requested an error occurs`() =
@@ -105,14 +102,13 @@ class SuperheroesDetailViewModelTest {
 
             //WHEN
 
-            //THEM
+            //THEN
             vm.uiState.test {
                 assertEquals(UiState(), awaitItem())
                 assertEquals(UiState(error = error), awaitItem())
                 cancel()
             }
         }
-
 
     @Test
     fun `State is updated with superheroes and progress indicator when is requested`() =
@@ -129,7 +125,7 @@ class SuperheroesDetailViewModelTest {
             //WHEN
             vm.loadSuperheroDetail()
 
-            //THEM
+            //THEN
             vm.uiState.test {
                 assertEquals(UiState(superheroView = null, loading = true), awaitItem())
                 assertEquals(UiState(superheroView = superhero, loading = false), awaitItem())

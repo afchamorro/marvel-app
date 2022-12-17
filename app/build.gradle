@@ -21,7 +21,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.acoders.marvelfanbook.di.HiltTestRunner"
 
         buildConfigField("String", "MARVEL_PRIVATE_API_KEY", apikeyProperties['MARVEL_PRIVATE_API_KEY'])
         buildConfigField("String", "MARVEL_PUBLIC_API_KEY", apikeyProperties['MARVEL_PUBLIC_API_KEY'])
@@ -48,12 +48,20 @@ android {
 
 dependencies {
 
+    ext {
+        okhttp_version = "5.0.0-alpha.2"
+        coroutines_version = '1.6.4'
+        retrofit_version = '2.9.0'
+        room_version = "2.4.3"
+        work_version = "2.7.1"
+        hilt_version = '2.43.1'
+    }
+
     // Android KTX
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.collection:collection-ktx:1.2.0'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-
 
     //Lifeciclye
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -67,23 +75,23 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //Dependence injection HILT
-    implementation "com.google.dagger:hilt-android:2.43.1"
-    kapt "com.google.dagger:hilt-android-compiler:2.43.1"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Network - OK HTTP
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     //Network - Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
     //Serialization - Moshi
-    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
     // Room Database
-    implementation 'androidx.room:room-runtime:2.4.3'
-    implementation 'androidx.room:room-ktx:2.4.3'
-    kapt 'androidx.room:room-compiler:2.4.3'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     //Errors
     implementation("io.arrow-kt:arrow-core:1.0.1")
@@ -95,12 +103,12 @@ dependencies {
     //Logs
     implementation "com.jakewharton.timber:timber:4.7.1"
 
-    // Navigation
+    //Navigation
     implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
-    // Splash
+    //Splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
     //Data Store
@@ -124,4 +132,26 @@ dependencies {
 
     //Turbine (for stat flows)
     testImplementation 'app.cash.turbine:turbine:0.8.0'
+
+    //INSTRUMENTATION TESTS
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+
+    //Network - OK HTTP
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:$okhttp_version")
+
+    //Coroutines
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    // optional - Test helpers
+    androidTestImplementation("androidx.work:work-testing:$work_version")
+
+    //Espresso
+    androidTestImplementation('androidx.test.espresso:espresso-contrib:3.5.0') {
+        exclude module: "protobuf-lite"
+    }
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.4'
+
+    //HILT
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
 }

@@ -13,12 +13,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
-class NetworkConnectivityManager @Inject constructor(@ApplicationContext context: Context) {
+
+interface NetworkConnectivityManager {
+    val hasConnection: Flow<Boolean>
+}
+
+class NetworkConnectivityManagerImpl @Inject constructor(@ApplicationContext context: Context) :
+    NetworkConnectivityManager {
 
     private val connectivityManager: ConnectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    val hasConnection: Flow<Boolean> = callbackFlow {
+    override val hasConnection: Flow<Boolean> = callbackFlow {
 
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
@@ -55,6 +61,7 @@ private fun getNetworkRequest(): NetworkRequest = NetworkRequest.Builder()
 @Suppress("DEPRECATION")
 private fun ConnectivityManager.isConnected(): Boolean =
     if (isSdkVersion(Build.VERSION_CODES.M))
-        this.getNetworkCapabilities(activeNetwork)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+        this.getNetworkCapabilities(activeNetwork)
+            ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
     else
         activeNetworkInfo?.isConnected ?: false

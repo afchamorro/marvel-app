@@ -1,8 +1,12 @@
 package com.acoders.marvelfanbook.features
 
 import com.acoders.marvelfanbook.core.platform.AppDispatcherProvider
+import com.acoders.marvelfanbook.features.comics.data.repository.ComicsRepositoryImpl
 import com.acoders.marvelfanbook.features.comics.domain.model.Comic
+import com.acoders.marvelfanbook.features.comics.domain.repository.ComicsRepository
 import com.acoders.marvelfanbook.features.comics.framework.model.ComicDto
+import com.acoders.marvelfanbook.features.comics.framework.remote.ComicsAPIDataSource
+import com.acoders.marvelfanbook.features.comics.presentation.model.ComicView
 import com.acoders.marvelfanbook.features.common.domain.models.Thumbnail
 import com.acoders.marvelfanbook.features.common.framework.remote.Paginated
 import com.acoders.marvelfanbook.features.common.framework.remote.PaginatedWrapper
@@ -72,7 +76,21 @@ fun buildSuperheroesEntitySample(vararg id: Long): List<SuperHeroEntity> = id.ma
     )
 }
 
-fun buildRepositoryWith(
+fun buildSuperheroViewSample(id: Long): SuperheroView = SuperheroView(
+    id = id,
+    name = "Name $id",
+    description = "Description $id"
+)
+
+fun buildComicsViewSample(vararg id: Int): List<ComicView> = id.map {
+    ComicView(
+        id = it,
+        title = "Title $it",
+        thumbnail = ThumbnailView.empty
+    )
+}
+
+fun buildSuperheroesRepositoryWith(
     localDataSuperheroesData: List<SuperHeroEntity>,
     remoteSuperheroesData: List<SuperheroDto>,
     remoteComicsData: List<ComicDto>,
@@ -93,5 +111,20 @@ fun buildRepositoryWith(
         remoteDataSource,
         localDataSource,
         attributionInfoLocalDataSource
+    )
+}
+
+fun buildComicsRepositoryWith(
+    remoteSuperheroesData: List<SuperheroDto>,
+    remoteComicsData: List<ComicDto>,
+): ComicsRepository {
+
+    val remoteDataSource = ComicsAPIDataSource(
+        FakeRemoteService(remoteSuperheroesData, remoteComicsData),
+        AppDispatcherProvider()
+    )
+
+    return ComicsRepositoryImpl(
+        remoteDataSource
     )
 }

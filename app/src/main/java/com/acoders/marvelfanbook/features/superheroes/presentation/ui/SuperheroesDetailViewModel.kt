@@ -22,7 +22,7 @@ class SuperheroesDetailViewModel @Inject constructor(
     private val getSuperheroComicsUseCase: GetSuperheroComicsUseCase
 ) : ViewModel() {
 
-    val heroId: Long =
+    var heroId: Long =
         SuperheroesDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).heroId.toLong()
 
     private val _uiState = MutableStateFlow(UiState())
@@ -59,9 +59,7 @@ class SuperheroesDetailViewModel @Inject constructor(
 
     private fun handleSuperHeroSuccess(superhero: SuperheroView) {
         _uiState.update {
-            it.copy(
-                superheroView = superhero, loading = false
-            )
+            it.copy(superheroView = superhero, loading = false)
         }
     }
 

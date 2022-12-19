@@ -1,9 +1,9 @@
 package com.acoders.marvelfanbook.features.superheroes.presentation.ui
 
 import app.cash.turbine.test
-import com.acoders.marvelfanbook.features.buildRepositoryWith
 import com.acoders.marvelfanbook.features.buildSuperheroesDtoSample
 import com.acoders.marvelfanbook.features.buildSuperheroesEntitySample
+import com.acoders.marvelfanbook.features.buildSuperheroesRepositoryWith
 import com.acoders.marvelfanbook.features.comics.framework.model.ComicDto
 import com.acoders.marvelfanbook.features.superheroes.FakeNetworkConnectivityManager
 import com.acoders.marvelfanbook.features.superheroes.domain.usecases.FetchHeroesListUseCase
@@ -17,7 +17,6 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
@@ -38,9 +37,9 @@ class SuperheroesIntegrationTest {
             assertEquals(UiState(dataList = emptyList(), loading = false), awaitItem())
 
             val superheroes = awaitItem().dataList
-            Assert.assertEquals("Name 1", superheroes[0].name)
-            Assert.assertEquals("Name 2", superheroes[1].name)
-            Assert.assertEquals("Name 3", superheroes[2].name)
+            assertEquals("Name 1", superheroes[0].name)
+            assertEquals("Name 2", superheroes[1].name)
+            assertEquals("Name 3", superheroes[2].name)
 
             cancel()
         }
@@ -95,7 +94,7 @@ class SuperheroesIntegrationTest {
         localAttributionLink: String = "link"
     ): SuperheroesViewModel {
 
-        val superheroesRepository = buildRepositoryWith(
+        val superheroesRepository = buildSuperheroesRepositoryWith(
             localSuperheroData,
             remoteSuperheroData,
             remoteComicsData,

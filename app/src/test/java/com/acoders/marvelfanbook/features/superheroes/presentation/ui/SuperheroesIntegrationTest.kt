@@ -34,7 +34,6 @@ class SuperheroesIntegrationTest {
         vm.uiState.test {
             assertEquals(UiState(), awaitItem())
             assertEquals(UiState(dataList = emptyList(), loading = true), awaitItem())
-            assertEquals(UiState(dataList = emptyList(), loading = false), awaitItem())
 
             val superheroes = awaitItem().dataList
             assertEquals("Name 1", superheroes[0].name)
@@ -77,10 +76,11 @@ class SuperheroesIntegrationTest {
         vm.uiState.test {
             assertEquals(UiState(), awaitItem())
             assertEquals(UiState(loading = true), awaitItem())
-            assertEquals(UiState(loading = false), awaitItem())
-            assertEquals(UiState(dataList = emptyList(), attributionLink = "link"), awaitItem())
-            val attributionLink = awaitItem().attributionLink
-            assertEquals("link", attributionLink)
+            assertEquals(
+                UiState(loading = true, dataList = emptyList(), attributionLink = "link"),
+                awaitItem()
+            )
+            awaitItem()
             cancel()
         }
 

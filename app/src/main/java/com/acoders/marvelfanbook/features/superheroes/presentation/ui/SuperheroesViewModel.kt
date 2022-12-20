@@ -54,7 +54,7 @@ class SuperheroesViewModel @Inject constructor(
                 .collect { flowData ->
                     _uiState.update {
                         it.copy(
-                            loading = false,
+                            loading = flowData.isEmpty(),
                             dataList = flowData
                         )
                     }

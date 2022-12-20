@@ -93,7 +93,7 @@ class SuperheroesViewModelTest {
             assertEquals(UiState(), awaitItem())
             assertEquals(UiState(loading = true), awaitItem())
             assertEquals(UiState(dataList = superheroes, loading = false), awaitItem())
-            assertEquals(UiState(dataList = superheroes,attributionLink = "link"), awaitItem())
+            assertEquals(UiState(dataList = superheroes,attributionLink = "link", loading = false), awaitItem())
             cancel()
         }
     }
@@ -118,7 +118,7 @@ class SuperheroesViewModelTest {
 
             //THEN
             vm.uiState.test {
-                assertEquals(UiState(networkAvailable = false, dataList = arrayListOf()), awaitItem())
+                assertEquals(UiState(networkAvailable = false, dataList = arrayListOf(), loading = true), awaitItem())
                 cancel()
             }
         }

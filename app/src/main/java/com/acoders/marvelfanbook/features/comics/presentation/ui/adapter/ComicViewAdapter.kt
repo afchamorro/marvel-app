@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.acoders.marvelfanbook.R
-import com.acoders.marvelfanbook.core.extensions.load
+import com.acoders.marvelfanbook.core.extensions.prepare
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapter
 import com.acoders.marvelfanbook.core.platform.delegateadapter.DelegateAdapterItem
 import com.acoders.marvelfanbook.databinding.ComicCardBinding
@@ -40,7 +40,7 @@ class ComicViewAdapter :
 
         fun bind(item: ComicView) {
             binding.apply {
-                comicIv.load(item.thumbnail.getUri())
+                comicIv.prepare().placeholder(R.drawable.no_photo).load(item.thumbnail.getUri())
                 comicTitleTv.text = item.title
             }
         }

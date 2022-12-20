@@ -28,6 +28,11 @@
         <item name="android:background">?colorPrimaryVariant</item>
     </style>
 
+<style name="SuperheroAppBarStyle">
+    <item name="android:background">?coverBackgroundColor</item>
+
+</style>
+
     <style name="SuperheroCollapsingToolbarLayoutStyle">
         <item name="collapsedTitleTextAppearance">@style/TextAppearance.App.CollapsingToolbar.Collapsed</item>
         <item name="contentScrim">?attr/colorPrimary</item>

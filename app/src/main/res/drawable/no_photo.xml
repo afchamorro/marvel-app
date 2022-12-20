@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape
+            android:width="128dp"
+            android:height="128dp"
+            android:shape="rectangle">
+            <solid android:color="@color/teal_700" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="32dp"
+        android:drawable="@drawable/ic_image"
+        android:gravity="center"
+        android:left="32dp"
+        android:right="32dp"
+        android:top="32dp" />
+
+</layer-list>

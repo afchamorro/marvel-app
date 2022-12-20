@@ -68,7 +68,7 @@ class SuperheroesFragmentTest {
 
 
     @Test
-    fun click_a_superhero_navigates_to_detail() {
+    fun click_a_superhero_navigates_to_detail() = runTest {
         Espresso.onView(withId(R.id.recyclerview))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(

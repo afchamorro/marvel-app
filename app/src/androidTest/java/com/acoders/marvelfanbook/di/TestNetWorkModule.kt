@@ -1,10 +1,14 @@
 package com.acoders.marvelfanbook.di
 
+import android.content.Context
+import com.acoders.marvelfanbook.core.platform.NetworkConnectivityManager
+import com.acoders.marvelfanbook.core.platform.NetworkConnectivityManagerImpl
 import com.acoders.marvelfanbook.data.di.NetworkModule
 import com.acoders.marvelfanbook.framework.remote.api.MarvelEndpoints
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 import okhttp3.OkHttpClient
@@ -50,4 +54,10 @@ object TestNetWorkModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): MarvelEndpoints =
         retrofit.create(MarvelEndpoints::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideNetworkConnectivityManager(@ApplicationContext context: Context): NetworkConnectivityManager =
+        NetworkConnectivityManagerImpl(context)
 }

@@ -11,7 +11,6 @@ import com.acoders.marvelfanbook.features.superheroes.domain.models.Superhero
 import com.acoders.marvelfanbook.features.superheroes.domain.repository.SuperheroesRepository
 import com.acoders.marvelfanbook.features.superheroes.framework.remote.SuperheroDto
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class SuperHeroesRepositoryImpl @Inject constructor(
@@ -20,9 +19,9 @@ class SuperHeroesRepositoryImpl @Inject constructor(
     private val attributionInfoLocalDataSource: AttributionInfoLocalDataSource
 ) : SuperheroesRepository {
 
-    override fun getSuperHeroesList(): Flow<List<Superhero>> = localDataSource.getSuperHeroesList().onEach {
-        if(it.isEmpty()) fetchHeroesList()
-    }
+    override val superheroes: Flow<List<Superhero>>
+        get() = localDataSource.superheroes
+
 
     override suspend fun fetchHeroesList(): Failure? {
         if (!localDataSource.isEmpty()) return null

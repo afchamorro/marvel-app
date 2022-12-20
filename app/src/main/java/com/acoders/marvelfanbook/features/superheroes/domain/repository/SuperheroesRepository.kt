@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SuperheroesRepository {
 
-    fun getSuperHeroesList() : Flow<List<Superhero>>
+    val superheroes : Flow<List<Superhero>>
 
     suspend fun fetchHeroesList(): Failure?
 

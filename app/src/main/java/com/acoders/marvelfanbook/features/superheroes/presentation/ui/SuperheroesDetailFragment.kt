@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.acoders.marvelfanbook.core.extensions.diff
-import com.acoders.marvelfanbook.core.extensions.invisible
 import com.acoders.marvelfanbook.core.extensions.load
 import com.acoders.marvelfanbook.core.extensions.visible
 import com.acoders.marvelfanbook.core.platform.AppBarStateChangeListener
@@ -23,13 +22,13 @@ import com.acoders.marvelfanbook.features.comics.presentation.ui.adapter.ComicVi
 import com.acoders.marvelfanbook.features.superheroes.presentation.model.SuperheroView
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SuperheroesDetailFragment : Fragment() {
 
-
     private val viewModel: SuperheroesDetailViewModel by viewModels()
+
+    private lateinit var superHeroDetailState: SuperHeroDetailState
 
     private var recyclerAdapter: RecycleViewDelegateAdapter = RecycleViewDelegateAdapter()
     private var _binding: FragmentSuperheroesDetailBinding? = null
@@ -51,12 +50,27 @@ class SuperheroesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initSuperHeroDetailState()
         setHeroTransitionName()
         setupNavigationUp()
         setRecycleViewAdapter()
         updateUI()
         viewModel.apply {
             loadSuperheroDetail()
+        }
+    }
+
+    private fun initSuperHeroDetailState() {
+        superHeroDetailState = buildMainState()
+        binding.fabDownload.setOnClickListener {
+            superHeroDetailState.requestStoragePermission {
+                viewModel.uiState.value.superheroView?.apply {
+                    superHeroDetailState.downloadSuperHeroCover(
+                        imageUrl = thumbnail.getUri(),
+                        title = name
+                    )
+                }
+            }
         }
     }
 
@@ -75,11 +89,6 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun setupNavigationUp() {
         binding.heroToolbar.setNavigationOnClickListener { findNavController().navigateUp() }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setRecycleViewAdapter() {
@@ -129,7 +138,6 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun bindToolbar(superheroView: SuperheroView?) {
         binding.apply {
-//            collapsingToolbar.title = superheroView?.name.orEmpty() // TODO problemas con la animación de transición
             heroIv.load(superheroView?.thumbnail?.getUri().orEmpty())
             tvHeroName.text = superheroView?.name.orEmpty()
             appbarLayout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
@@ -142,6 +150,9 @@ class SuperheroesDetailFragment : Fragment() {
                             collapsingToolbar.title = ""
                         }
                         State.IDLE -> {
+                            collapsingToolbar.title = ""
+                        }
+                        else -> {
                             collapsingToolbar.title = ""
                         }
                     }
@@ -159,5 +170,10 @@ class SuperheroesDetailFragment : Fragment() {
 
     private fun showError(show: Boolean) {
         // TODO SNACKA BAR if (show) binding.errorTv.visible() else binding.errorTv.gone()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

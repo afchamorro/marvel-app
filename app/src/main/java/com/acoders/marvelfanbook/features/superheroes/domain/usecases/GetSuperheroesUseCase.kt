@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class GetSuperheroesUseCase @Inject constructor(private val repository: SuperheroesRepository) {
 
-    //TODO, CREO QUE DEBEMOS DEVOLER EL SUPERHERO Y MAPEARLO EN EL VIEWMODEL
     operator fun invoke(): Flow<List<SuperheroView>> =
-        repository.getSuperHeroesList().map { heroes -> heroes.map { it.toPresentationModel() } }
+        repository.superheroes.map { heroes -> heroes.map { it.toPresentationModel() } }
 }

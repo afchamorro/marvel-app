@@ -66,7 +66,6 @@ class SuperheroesFragmentTest {
 
     }
 
-
     @Test
     fun click_a_superhero_navigates_to_detail() = runTest {
         Espresso.onView(withId(R.id.recyclerview))

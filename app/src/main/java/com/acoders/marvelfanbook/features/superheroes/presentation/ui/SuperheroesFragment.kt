@@ -2,7 +2,6 @@ package com.acoders.marvelfanbook.features.superheroes.presentation.ui
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,7 +86,6 @@ class SuperheroesFragment : Fragment() {
             }
 
             diff(viewLifecycleOwner, { it.dataList }) {
-                Log.d("TEST", "Collecting hero list")
                 bindSuperHeroesList(it)
             }
 

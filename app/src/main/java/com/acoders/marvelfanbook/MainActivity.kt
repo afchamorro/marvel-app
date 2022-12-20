@@ -2,18 +2,17 @@ package com.acoders.marvelfanbook
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.acoders.marvelfanbook.features.superheroes.presentation.ui.SuperheroesFragment
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addTestFragment()
     }
 
-    private fun addTestFragment(){
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentHost, SuperheroesFragment.newInstance()).commit()
-    }
+    override fun onSupportNavigateUp(): Boolean = findNavController(R.id.fragment_container).navigateUp()
 }

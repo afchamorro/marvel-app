@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="primary_500">#F44130</color>
+    <color name="primary_600">#E63630</color>
+    <color name="primary_700">#C72523</color>
+    <color name="primary_800">#C72323</color>
+    <color name="primary_900">#B81616</color>
+    <color name="teal_200">#B9BEBA</color>
+    <color name="teal_700">#B9BEBA</color>
     <color name="black">#FF000000</color>
+    <color name="black60">#99000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="splash_color">#d40317</color>
+
+    <color name="black_trans_90">#E6000000</color>
+    <color name="black_trans_80">#CC000000</color>
+    <color name="black_trans_70">#B3000000</color>
+    <color name="black_trans_60">#99000000</color>
+    <color name="black_trans_50">#80000000</color>
+    <color name="black_trans_40">#66000000</color>
+    <color name="black_trans_30">#4D000000</color>
+    <color name="black_trans_20">#33000000</color>
+    <color name="black_trans_15">#26000000</color>
+    <color name="black_trans_10">#1A000000</color>
+    <color name="black_trans_05">#0D000000</color>
+    <color name="black_trans_03">#03000000</color>
+
+    <color name="white_trans_90">#E6FFFFFF</color>
+    <color name="white_trans_85">#D9FFFFFF</color>
+    <color name="white_trans_80">#CCFFFFFF</color>
+    <color name="white_trans_70">#B3FFFFFF</color>
+    <color name="white_trans_60">#99FFFFFF</color>
+    <color name="white_trans_50">#8FFFFFF0</color>
+    <color name="white_trans_40">#66FFFFFF</color>
+    <color name="white_trans_30">#4DFFFFFF</color>
+    <color name="white_trans_20">#33FFFFFF</color>
+    <color name="white_trans_15">#26FFFFFF</color>
+    <color name="white_trans_10">#1AFFFFFF</color>
+    <color name="white_trans_05">#0DFFFFFF</color>
+    <color name="white_trans_03">#03FFFFFF</color>
+
 </resources>

@@ -2,6 +2,7 @@ package com.acoders.marvelfanbook.core.extensions
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.os.Build
 import android.widget.Toast
 
 val Context.connectivityManager: ConnectivityManager
@@ -11,3 +12,5 @@ val Context.connectivityManager: ConnectivityManager
 fun Context.toast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
+
+fun isSdkVersion(versionCode: Int): Boolean = (Build.VERSION.SDK_INT >= versionCode)

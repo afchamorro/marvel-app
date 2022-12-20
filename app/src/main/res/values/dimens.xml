@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="gap_huge">64dp</dimen>
+    <dimen name="gap_double">32dp</dimen>
+    <dimen name="gap_big">24dp</dimen>
+    <dimen name="gap_regular">16dp</dimen>
+    <dimen name="gap_small">12dp</dimen>
+    <dimen name="gap_half">8dp</dimen>
+    <dimen name="gap_less_half">6dp</dimen>
+    <dimen name="gap_tiny">4dp</dimen>
+
+    <dimen name="superhero_card_width">170dp</dimen>
+    <dimen name="superhero_card_height">200dp</dimen>
+    <dimen name="superhero_card_margin">2dp</dimen>
+    <dimen name="superhero_card_corners_radius">6dp</dimen>
+    <dimen name="attribution_message_height">30dp</dimen>
+    <dimen name="imageShadowHeight">100dp</dimen>
+    <dimen name="comic_height">200dp</dimen>
+    <dimen name="comic_width">133dp</dimen>
+    <dimen name="superhero_cover_min_height">350dp</dimen>
+</resources>

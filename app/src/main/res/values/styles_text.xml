@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Text Styles -->
+    <style name="TextRegular">
+        <item name="fontFamily">@font/regular</item>
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="TextMedium">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="TextSemibold">
+        <item name="fontFamily">@font/semibold</item>
+        <item name="android:fontFamily">@font/semibold</item>
+    </style>
+
+</resources>

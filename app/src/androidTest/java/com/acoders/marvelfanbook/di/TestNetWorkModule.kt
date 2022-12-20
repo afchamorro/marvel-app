@@ -55,7 +55,6 @@ object TestNetWorkModule {
     fun provideApiService(retrofit: Retrofit): MarvelEndpoints =
         retrofit.create(MarvelEndpoints::class.java)
 
-
     @Provides
     @Singleton
     fun provideNetworkConnectivityManager(@ApplicationContext context: Context): NetworkConnectivityManager =
